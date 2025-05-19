@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Библиотека | HackGEO</title>
+    <meta name="description" content="Геологическая библиотека - учебники, пособия и научные работы">
+    <link rel="stylesheet" href="assets/css/mainstyle.css">
+    <link rel="stylesheet" href="assets/css/library.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="main-menu-button" id="main-menu-button"><i class="ri-menu-fold-2-fill"></i></div>
+        <div class="sitename">
+            <a href="index.html">
+                <span class="logo-hack">Hack</span><span class="logo-geo">GEO</span>
+                <span class="logo-icon">🌍</span>
+            </a>
+        </div>		  
+        <div class="theme-toggle-container">
+            <label class="theme-toggle-label">Тема</label>
+            <label class="theme-toggle">
+                <input type="checkbox" id="theme-toggle-checkbox">
+                <span class="theme-toggle-slider">
+                    <i class="ri-sun-line light-icon"></i>
+                    <i class="ri-moon-line dark-icon"></i>
+                </span>
+            </label>
+        </div>
+    </header>
+
+    
+    <nav class="wrap-main-menu">
+        <ul class="main-menu">
+            <li><a href="/profileform.html"><i class="ri-user-3-fill"></i> Профиль</a></li>
+            <li><a href="https://www.tyuiu.ru/"><i class="ri-newspaper-line"></i> Новости</a></li>
+            <li><a href="/library.html"><i class="ri-book-line"></i> Библиотека</a></li>
+            <li><a href="/labs.html"><i class="ri-microscope-fill"></i> Лабораторные работы</a></li>
+            <li><a href="/exams.html"><i class="ri-graduation-cap-fill"></i> Экзамены</a></li>
+            <li><a href="/feedback.html"><i class="ri-feedback-line"></i> Обратная связь</a></li>
+            <li><a href="/contacts.html"><i class="ri-contacts-fill"></i> Контакты</a></li>
+        </ul>
+    </nav>
+
+    <nav class="horizontal-menu">
+        <ul>
+            <li><a href="/profileform.html"><i class="ri-user-3-fill"></i> Профиль</a></li>
+            <li><a href="https://www.tyuiu.ru/"><i class="ri-newspaper-line"></i> Новости</a></li>
+            <li><a href="/library.html"><i class="ri-book-line"></i> Библиотека</a></li>
+            <li><a href="/labs.html"><i class="ri-microscope-fill"></i> Лабораторные</a></li>
+            <li><a href="/exams.html"><i class="ri-graduation-cap-fill"></i> Экзамены</a></li>
+            <li><a href="/feedback.html"><i class="ri-feedback-line"></i> Обратная связь</a></li>
+            <li><a href="/contacts.html"><i class="ri-contacts-fill"></i> Контакты</a></li>
+        </ul>
+    </nav>
+    
+    
+    <main class="library-container">
+        
+        <header class="library-header">
+            <h1>Библиотека <i class="ri-book-2-line"></i></h1>
+            <p class="library-description">Коллекция учебников, пособий и научных работ по геологии и смежным дисциплинам</p>
+            
+            
+            <section class="library-search">
+                <div class="search-bar" role="search">
+                    <i class="ri-search-line" aria-hidden="true"></i>
+                    <input type="search" id="book-search" 
+                           placeholder="Поиск по названию или автору..."
+                           aria-label="Поиск книг">
+                </div>
+            </section>
+            
+            
+            <section class="library-actions">
+                <button class="upload-btn" id="upload-book-btn">
+                    <i class="ri-upload-cloud-2-line" aria-hidden="true"></i> 
+                    Загрузить книгу
+                </button>
+                <div class="filter-container">
+                    <select id="subject-filter" aria-label="Фильтр по предметам">
+                        <option value="all">Все предметы</option>
+                        <option value="geology">Геология</option>
+                        <option value="geophysics">Геофизика</option>
+                        <option value="geochemistry">Геохимия</option>
+                        <option value="hydrogeology">Гидрогеология</option>
+                        <option value="nglaws">Горное право</option>
+                        <option value="lythology">Литология</option>
+                        <option value="mechanic">Механика</option>
+                        <option value="mineralogy">Минералогия</option>
+                        <option value="ngprovances">Нефтегазоносные провинции</option>
+                        <option value="oilandgas">Нефтегазовое дело</option>
+                        <option value="podschetzapasov">Подсчет запасов</option>
+                        <option value="other">Разные дисциплины</option>
+                    </select>
+                    <i class="ri-filter-3-line" aria-hidden="true"></i>
+                </div>
+            </section>
+        </header>
+        
+        
+        <dialog id="upload-modal" class="modal">
+            <div class="modal-content">
+                <button class="close" aria-label="Закрыть">&times;</button>
+                <h2>Загрузить книгу</h2>
+                <form id="upload-book-form" action="/api/upload-book.php" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="book-title">Название книги*</label>
+                        <input type="text" id="book-title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="book-author">Автор*</label>
+                        <input type="text" id="book-author" name="author" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="book-year">Год издания*</label>
+                        <input type="number" id="book-year" name="year" min="1800" max="2100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="book-subject">Предмет*</label>
+                        <select id="book-subject" name="subject" required>
+                            <option value="">Выберите предмет</option>
+                            <option value="geology">Геология</option>
+                            <option value="geophysics">Геофизика</option>
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="book-description">Описание</label>
+                        <textarea id="book-description" name="description" rows="4"></textarea>
+                    </div>
+                    <div class="form-group file-upload">
+                        <label for="book-file">Файл книги (PDF, DOCX, EPUB)*</label>
+                        <div class="file-input-container">
+                            <input type="file" id="book-file" name="book_file" 
+                                   accept=".pdf,.docx,.epub" required>
+                            <div class="file-input-custom">
+                                <span class="file-name">Файл не выбран</span>
+                                <button type="button" class="browse-btn">Обзор</button>
+                            </div>
+                        </div>
+                        <p class="file-hint">Максимальный размер файла: 20МБ</p>
+                    </div>
+                    <div class="form-group file-upload">
+                        <label for="book-cover">Обложка книги (JPG, PNG)</label>
+                        <div class="file-input-container">
+                            <input type="file" id="book-cover" name="book_cover" 
+                                   accept=".jpg,.jpeg,.png">
+                            <div class="file-input-custom">
+                                <span class="file-name">Файл не выбран</span>
+                                <button type="button" class="browse-btn">Обзор</button>
+                            </div>
+                        </div>
+                        <p class="file-hint">Рекомендуемый размер: 300x450px</p>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn">Отмена</button>
+                        <button type="submit" class="submit-btn">Загрузить</button>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+        
+        <dialog id="book-info-modal" class="modal">
+            <div class="modal-content book-info-content">
+                <button class="close" aria-label="Закрыть">&times;</button>
+                <article class="book-info-layout">
+                    <figure class="book-cover-container">
+                        <img id="modal-book-cover" src="" alt="Обложка книги">
+                    </figure>
+                    <div class="book-details">
+                        <h2 id="modal-book-title"></h2>
+                        <p class="book-author">
+                            <i class="ri-user-3-line" aria-hidden="true"></i> 
+                            <span id="modal-book-author"></span>
+                        </p>
+                        <p class="book-year">
+                            <i class="ri-calendar-line" aria-hidden="true"></i> 
+                            <span id="modal-book-year"></span>
+                        </p>
+                        <p class="book-subject">
+                            <i class="ri-book-open-line" aria-hidden="true"></i> 
+                            <span id="modal-book-subject"></span>
+                        </p>
+                        <div class="book-description">
+                            <h3>Описание</h3>
+                            <p id="modal-book-description"></p>
+                        </div>
+                        <div class="book-actions">
+                            <a href="#" id="modal-download-link
+
+                            <a href="#" id="modal-download-link" class="download-btn" download>
+                                <i class="ri-download-cloud-2-line" aria-hidden="true"></i> 
+                                Скачать
+                            </a>
+                            <button id="modal-read-online" class="read-online-btn">
+                                <i class="ri-book-read-line" aria-hidden="true"></i> 
+                                Читать онлайн
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </dialog>
+
+        
+        <section class="library-shelves">
+            
+            <article class="bookshelf-section" data-subject="geology">
+                <h2 class="subject-title">Геология</h2>
+                <div class="bookshelf">
+                    <div class="shelf-background" aria-hidden="true"></div>
+                    <div class="books-container" id="geology-books">
+                        
+                    </div>
+                </div>
+            </article>
+
+            
+            <article class="bookshelf-section" data-subject="geophysics">
+                <h2 class="subject-title">Геофизика</h2>
+                <div class="bookshelf">
+                    <div class="shelf-background" aria-hidden="true"></div>
+                    <div class="books-container" id="geophysics-books">
+                        
+                    </div>
+                </div>
+            </article>
+
+            
+            <article class="bookshelf-section" data-subject="geochemistry">
+                <h2 class="subject-title">Геохимия</h2>
+                <div class="bookshelf">
+                    <div class="shelf-background" aria-hidden="true"></div>
+                    <div class="books-container" id="geochemistry-books">
+                        
+                    </div>
+                </div>
+            </article>
+
+            
+            <article class="bookshelf-section" data-subject="hydrogeology">
+                <h2 class="subject-title">Гидрогеология</h2>
+                <div class="bookshelf">
+                    <div class="shelf-background" aria-hidden="true"></div>
+                    <div class="books-container" id="hydrogeology-books">
+                        
+                    </div>
+                </div>
+            </article>
+
+            
+            <article class="bookshelf-section" data-subject="nglaws">
+                <h2 class="subject-title">Горное право</h2>
+                <div class="bookshelf">
+                    <div class="shelf-background" aria-hidden="true"></div>
+                    <div class="books-container" id="nglaws-books">
+                        
+                    </div>
+                </div>
+            </article>
+
+            
+            <article class="bookshelf-section" data-subject="lythology">
+                <h2 class="subject-title">Литология</h2>
+                <div class="bookshelf">
+                    <div class="shelf-background" aria-hidden="true"></div>
+                    <div class="books-container" id="lythology-books">
+                        
+                    </div>
+                </div>
+            </article>
+
+            
+            <article class="bookshelf-section" data-subject="mechanic">
+                <h2 class="subject-title">Механика</h2>
+                <div class="bookshelf">
+                    <div class="shelf-background" aria-hidden="true"></div>
+                    <div class="books-container" id="mechanic-books">
+                        
+                    </div>
+                </div>
+            </article>
+
+            
+            <article class="bookshelf-section" data-subject="mineralogy">
+                <h2 class="subject-title">Минералогия</h2>
+                <div class="bookshelf">
+                    <div class="shelf-background" aria-hidden="true"></div>
+                    <div class="books-container" id="mineralogy-books">
+                        
+                    </div>
+                </div>
+            </article>
+
+            
+            <article class="bookshelf-section" data-subject="ngprovances">
+                <h2 class="subject-title">Нефтегазоносные провинции</h2>
+                <div class="bookshelf">
+                    <div class="shelf-background" aria-hidden="true"></div>
+                    <div class="books-container" id="ngprovances-books">
+                        
+                    </div>
+                </div>
+            </article>
+
+            
+            <article class="bookshelf-section" data-subject="oilandgas">
+                <h2 class="subject-title">Нефтегазовое дело</h2>
+                <div class="bookshelf">
+                    <div class="shelf-background" aria-hidden="true"></div>
+                    <div class="books-container" id="oilandgas-books">
+                        
+                    </div>
+                </div>
+            </article>
+
+            
+            <article class="bookshelf-section" data-subject="podschetzapasov">
+                <h2 class="subject-title">Подсчет запасов</h2>
+                <div class="bookshelf">
+                    <div class="shelf-background" aria-hidden="true"></div>
+                    <div class="books-container" id="podschetzapasov-books">
+                        
+                    </div>
+                </div>
+            </article>
+
+            
+            <article class="bookshelf-section" data-subject="other">
+                <h2 class="subject-title">Разные дисциплины</h2>
+                <div class="bookshelf">
+                    <div class="shelf-background" aria-hidden="true"></div>
+                    <div class="books-container" id="other-books">
+                        
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    
+    <footer>
+        <div class="footer-content">
+            <p>Разработка и дизайн: Пинигин Сергей</p>
+            <p>e-mail: <a href="mailto:pinigin09@yandex.ru">pinigin09@yandex.ru</a></p>
+        </div>
+    </footer>
+
+    
+    <div class="backgroundmenu" aria-hidden="true"></div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="/assets/js/mainscript.js"></script>
+    <script src="/assets/js/library.js"></script>
+</body>
+</html>

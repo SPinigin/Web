@@ -1,0 +1,490 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #D2691E; /* Шоколадный */
+    --primary-dark: #A0522D; /* Темно-коричневый */
+    --secondary-color: #E9967A; /* Темный лосось */
+    --accent-color: #F4A460; /* Песочно-коричневый */
+    --text-dark: #5D4037; /* Темно-коричневый для текста */
+    --text-light: #FFF8DC; /* Кремовый для светлого текста */
+    --bg-light: #FFF8E1; /* Светло-бежевый фон */
+    --bg-medium: #FAEBD7; /* Античный белый */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    background-image: url('data:image/png;base64,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');
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s;
+    box-shadow: 0 3px 6px rgba(139, 69, 19, 0.2);
+}
+
+.btn:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Стили для шапки */
+header {
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(139, 69, 19, 0.1);
+    padding: 20px 0;
+    position: relative;
+}
+
+.header-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--primary-dark);
+}
+
+/* Стили для основного меню */
+.main-nav {
+    width: 100%;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid #F5DEB3; /* Пшеничный */
+    border-bottom: 1px solid #F5DEB3;
+    padding: 15px 0;
+    background-color: var(--bg-medium);
+}
+
+.menu li {
+    margin: 0 15px;
+}
+
+.menu a {
+    font-weight: 500;
+    color: var(--text-dark);
+    padding: 5px 10px;
+    transition: color 0.3s;
+    position: relative;
+}
+
+.menu a:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.menu a:hover {
+    color: var(--primary-color);
+}
+
+.menu a:hover:after {
+    width: 100%;
+    left: 0;
+}
+
+/* Стили для мобильного меню */
+.mobile-menu-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border-radius: 5px;
+    z-index: 1000;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    transition: background-color 0.3s;
+}
+
+.mobile-menu-toggle:hover {
+    background-color: var(--primary-dark);
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -280px; /* Скрыто по умолчанию */
+    width: 280px;
+    height: 100%;
+    background-color: var(--bg-medium);
+    z-index: 1001;
+    transition: right 0.3s ease;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+.mobile-menu.active {
+    right: 0; /* Показываем меню */
+}
+
+.mobile-menu-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--primary-dark);
+}
+
+.mobile-menu-items {
+    padding: 60px 20px 20px;
+}
+
+.mobile-menu-items li {
+    margin-bottom: 15px;
+}
+
+.mobile-menu-items a {
+    display: block;
+    padding: 10px 15px;
+    font-size: 18px;
+    color: var(--text-dark);
+    border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+    transition: all 0.3s;
+}
+
+.mobile-menu-items a:hover {
+    background-color: rgba(139, 69, 19, 0.05);
+    padding-left: 20px;
+    color: var(--primary-color);
+}
+
+/* Стили для главного баннера */
+.hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+    background-size: cover;
+    background-position: center;
+    color: var(--text-light);
+    text-align: center;
+    padding: 100px 0;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Стили для секции особенностей */
+.features {
+    padding: 80px 0;
+    background-color: var(--bg-medium);
+}
+
+.features h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--primary-dark);
+}
+
+.features h2:after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: var(--accent-color);
+    margin: 15px auto 0;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.feature {
+    text-align: center;
+    padding: 30px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 8px 20px rgba(139, 69, 19, 0.08);
+    transition: transform 0.3s;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+}
+
+.feature h3 {
+    margin-bottom: 15px;
+    color: var(--primary-dark);
+}
+
+/* Стили для секции призыва к действию */
+.cta {
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+    text-align: center;
+    padding: 80px 0;
+}
+
+.cta h2 {
+    margin-bottom: 20px;
+}
+
+.cta p {
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta .btn {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+.cta .btn:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Стили для карусели фотографий */
+.gallery-carousel {
+    padding: 80px 0;
+    background-color: var(--bg-light);
+    overflow: hidden;
+}
+
+.gallery-carousel h2 {
+    text-align: center;
+    color: var(--primary-dark);
+    margin-bottom: 15px;
+}
+
+.gallery-subtitle {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--text-dark);
+    font-style: italic;
+}
+
+.swiper-container {
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 60px;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: 300px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(139, 69, 19, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.swiper-slide:hover {
+    transform: scale(1.03);
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Стилизация пагинации и стрелок */
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: var(--primary-color);
+    opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--primary-color);
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    color: var(--primary-dark);
+}
+
+/* Анимация для подсветки активного слайда */
+.swiper-slide-active {
+    transform: scale(1.1);
+    box-shadow: 0 15px 30px rgba(139, 69, 19, 0.2);
+}
+
+/* Стили для подвала */
+footer {
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    padding: 30px 0;
+    text-align: center;
+}
+
+.social-links {
+    margin-top: 15px;
+}
+
+.social-link {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.social-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 992px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    /* Скрываем основное меню и показываем кнопку мобильного меню */
+    .main-nav {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    /* Корректируем заголовок для лучшего отображения на мобильных */
+    header h1 {
+        font-size: 1.8rem;
+        padding-right: 50px; /* Место для кнопки меню */
+    }
+    
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .swiper-slide {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .swiper-slide-active {
+        transform: scale(1.05);
+    }
+    
+    /* Для лучшего отображения на мобильных */
+    .feature {
+        padding: 20px;
+    }
+    
+    .cta, .gallery-carousel, .features {
+        padding: 50px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .hero {
+        padding: 70px 0;
+    }
+    
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .swiper-slide {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .feature-icon {
+        font-size: 2rem;
+    }
+    
+    .social-link {
+        margin: 0 5px;
+        font-size: 0.9rem;
+    }
+}

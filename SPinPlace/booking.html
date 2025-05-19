@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бронирование коттеджа</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_orange.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/booking.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-wrapper">
+                <h1>Коттедж для бронирования</h1>
+                
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+
+                <nav class="main-nav">
+                    <ul class="menu">
+                        <li><a href="booking.html" class="active">Бронирование</a></li>
+                        <li><a href="prices.html">Цены</a></li>
+                        <li><a href="rules.html">Правила проживания</a></li>
+                        <li><a href="gallery.html">Галерея</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="feedback.html">Отзывы</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-close">
+                <i class="fas fa-times"></i>
+            </div>
+            <ul class="mobile-menu-items">
+                <li><a href="booking.html" class="active">Бронирование</a></li>
+                <li><a href="prices.html">Цены</a></li>
+                <li><a href="rules.html">Правила проживания</a></li>
+                <li><a href="gallery.html">Галерея</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+                <li><a href="feedback.html">Отзывы</a></li>
+            </ul>
+        </div>
+    </header>
+    
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h2>Бронирование коттеджа</h2>
+                <p>Заполните форму ниже для бронирования коттеджа на выбранные даты</p>
+            </div>
+        </section>
+        
+        <section class="booking-section">
+            <div class="container">
+                <div class="booking-container">
+                    <div class="booking-info">
+                        <h3>Информация о бронировании</h3>
+                        <p>Выберите даты вашего пребывания и заполните контактную информацию. Мы свяжемся с вами для подтверждения бронирования.</p>
+                        
+                        <div class="booking-features">
+                            <div class="booking-feature">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Быстрое подтверждение</span>
+                            </div>
+                            <div class="booking-feature">
+                                <i class="fas fa-ban"></i>
+                                <span>Бесплатная отмена за 5 дней</span>
+                            </div>
+                            <div class="booking-feature">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Безопасная оплата</span>
+                            </div>
+                        </div>
+
+                        <div class="booking-calendar-container">
+                            <h4>Выберите даты проживания</h4>
+                            <div class="booking-calendar" id="booking-calendar"></div>
+                            <div class="selected-dates-info">
+                                <div class="selected-dates-row">
+                                    <span>Заезд:</span>
+                                    <span id="check-in-date">Не выбрано</span>
+                                </div>
+                                <div class="selected-dates-row">
+                                    <span>Выезд:</span>
+                                    <span id="check-out-date">Не выбрано</span>
+                                </div>
+                                <div class="selected-dates-row total-nights">
+                                    <span>Всего ночей:</span>
+                                    <span id="total-nights">0</span>
+                                </div>
+                                <div class="selected-dates-row total-price">
+                                    <span>Стоимость проживания:</span>
+                                    <span id="total-price">0 ₽</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-form-container">
+                        <form id="booking-form" class="booking-form" action="bookingprocess.php" method="POST">
+                            
+                            <input type="hidden" id="check-in" name="check_in">
+                            <input type="hidden" id="check-out" name="check_out">
+                            <input type="hidden" id="nights" name="nights" value="0">
+                            <input type="hidden" id="price" name="price" value="0">
+                            
+                            <div class="form-group selected-dates-display">
+                                <label>Выбранные даты</label>
+                                <div class="selected-dates-box">
+                                    <div class="date-box">
+                                        <div class="date-label">Заезд</div>
+                                        <div id="display-check-in" class="date-value">Выберите дату</div>
+                                    </div>
+                                    <div class="date-box-separator">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                    <div class="date-box">
+                                        <div class="date-label">Выезд</div>
+                                        <div id="display-check-out" class="date-value">Выберите дату</div>
+                                    </div>
+                                </div>
+                                <div class="price-display">
+                                    <span>Стоимость:</span>
+                                    <span id="display-price" class="price-value">0 ₽</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="guests">Количество гостей <span class="required">*</span></label>
+                                <div class="select-wrapper">
+                                    <select id="guests" name="guests" class="form-control" required>
+                                        <option value="" disabled selected>Выберите количество</option>
+                                        <option value="1">1 человек</option>
+                                        <option value="2">2 человека</option>
+                                        <option value="3">3 человека</option>
+                                        <option value="4">4 человека</option>
+                                        <option value="5">5 человек</option>
+                                        <option value="6">6 человек</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label for="lastname">Фамилия <span class="required">*</span></label>
+                                    <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Введите фамилию" required>
+                                </div>
+                                
+                                <div class="form-group half">
+                                    <label for="firstname">Имя <span class="required">*</span></label>
+                                    <input type="text" id="firstname" name="firstname" class="form-control" placeholder="Введите имя" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Телефон <span class="required">*</span></label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-phone input-icon"></i>
+                                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="+7 (___) ___-__-__" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Электронная почта</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-envelope input-icon"></i>
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="example@mail.com">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="comments">Дополнительные пожелания</label>
+                                <textarea id="comments" name="comments" class="form-control" rows="4" placeholder="Укажите ваши пожелания или вопросы"></textarea>
+                            </div>
+                            
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="agree" name="agree" required>
+                                <label for="agree">Я согласен с <a href="rules.html">правилами проживания</a> и условиями бронирования <span class="required">*</span></label>
+                            </div>
+                            
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-book">Забронировать</button>
+                            </div>
+                            
+                            <p class="form-note"><span class="required">*</span> — обязательные поля</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="booking-help">
+            <div class="container">
+                <h3>Нужна помощь с бронированием?</h3>
+                <p>Свяжитесь с нами по телефону <a href="tel:+79324779622">+7 (932) 477-96-22</a> или напишите на <a href="mailto:pinigin09@yandex.ru">pinigin09@yandex.ru</a></p>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Коттедж для бронирования. Все права защищены.</p>
+            <div class="social-links">
+                <a href="#" class="social-link">Facebook</a>
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">WhatsApp</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/booking.js"></script>
+</body>
+</html>

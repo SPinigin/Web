@@ -1,0 +1,81 @@
+/* Дополнительные стили для профиля */
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    font-size: 32px;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), 0 0 10px rgba(6, 182, 212, 0.3);
+  }
+  
+  .profile-info h2 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+  }
+  
+  .profile-info p {
+    color: var(--text-light);
+  }
+  
+  .profile-section {
+    margin-bottom: 25px;
+  }
+  
+  .profile-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .profile-section h3:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+  }
+  
+  .profile-section p {
+    margin-bottom: 10px;
+  }
+  
+  .profile-section strong {
+    color: var(--primary-color);
+    font-weight: 600;
+  }
+  
+  .profile-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .profile-actions .btn {
+    flex: 1;
+  }
+  
+  .profile-actions .btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+  }
+  
+  .profile-actions .btn-secondary:hover {
+    background-color: rgba(6, 182, 212, 0.1);
+  }
+  

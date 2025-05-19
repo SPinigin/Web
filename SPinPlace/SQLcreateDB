@@ -1,0 +1,41 @@
+-- Создаем базу данных
+CREATE DATABASE IF NOT EXISTS u3116579_spinplace CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Используем созданную базу данных
+USE u3116579_spinplace;
+
+-- Таблица для хранения информации о гостях
+CREATE TABLE IF NOT EXISTS Guests (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Таблица для хранения контактной информации гостей
+CREATE TABLE IF NOT EXISTS Contacts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    guest_id INT NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    email VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (guest_id) REFERENCES Guests(id) ON DELETE CASCADE
+);
+
+-- Таблица для хранения информации о бронировании
+CREATE TABLE IF NOT EXISTS Booking (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    guest_id INT NOT NULL,
+    check_in DATE NOT NULL,
+    check_out DATE NOT NULL,
+    nights INT NOT NULL,
+    person_count INT NOT NULL,
+    booking_date DATETIME NOT NULL,
+    comments TEXT,
+    price INT NOT NULL DEFAULT 0,
+    status ENUM('pending', 'confirmed', 'canceled') DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (guest_id) REFERENCES Guests(id) ON DELETE CASCADE
+);
