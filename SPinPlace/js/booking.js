@@ -1,348 +1,331 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Объявляем переменные для элементов страницы
-    const checkInDateElement = document.getElementById('check-in-date');
-    const checkOutDateElement = document.getElementById('check-out-date');
-    const totalNightsElement = document.getElementById('total-nights');
-    const totalPriceElement = document.getElementById('total-price');
-    const checkInInput = document.getElementById('check-in');
-    const checkOutInput = document.getElementById('check-out');
-    const nightsInput = document.getElementById('nights');
-    const priceInput = document.getElementById('price');
-    const displayCheckIn = document.getElementById('display-check-in');
-    const displayCheckOut = document.getElementById('display-check-out');
-    const displayPrice = document.getElementById('display-price');
-    
-    // Цены в зависимости от дня недели
-    const weekdayPrice = 9000; // Пн-Чт: 9000 рублей
-    const weekendPrice = 12000; // Пт-Вс: 12000 рублей
-    
-    // Текущая дата (для ограничения календаря)
-    const today = new Date();
-    
-    // Инициализация календаря с помощью Flatpickr
-    const bookingCalendar = flatpickr("#booking-calendar", {
-        inline: true, // Всегда показывать календарь
-        mode: "range",
-        minDate: "today",
-        dateFormat: "d.m.Y",
-        locale: "ru",
-        disableMobile: true, // Отключаем нативный мобильный календарь
-        showMonths: window.innerWidth < 768 ? 1 : 2, // На мобильных устройствах показываем 1 месяц
-        onChange: function(selectedDates, dateStr, instance) {
-            if (selectedDates.length === 2) {
-                // Форматирование дат
-                const checkInDate = formatDate(selectedDates[0]);
-                const checkOutDate = formatDate(selectedDates[1]);
-                
-                // Рассчитываем количество ночей
-                const nights = calculateNights(selectedDates[0], selectedDates[1]);
-                
-                // Обновляем информацию о выбранных датах
-                checkInDateElement.textContent = checkInDate;
-                checkOutDateElement.textContent = checkOutDate;
-                totalNightsElement.textContent = nights;
-                
-                // Обновляем скрытые поля формы
-                checkInInput.value = formatDateForServer(selectedDates[0]);
-                checkOutInput.value = formatDateForServer(selectedDates[1]);
-                nightsInput.value = nights;
-                
-                // Обновляем отображение в форме
-                displayCheckIn.textContent = checkInDate;
-                displayCheckOut.textContent = checkOutDate;
-                
-                // Рассчитываем стоимость с учетом дней недели
-                const price = calculatePriceByDays(selectedDates[0], selectedDates[1]);
-                
-                // ВАЖНО: Устанавливаем значение цены во все элементы интерфейса
-                totalPriceElement.textContent = formatPrice(price);
-                displayPrice.textContent = formatPrice(price);
-                priceInput.value = price;
-                
-                // Проверяем, что цена действительно обновилась в DOM
-                // console.log('Updated DOM elements:', {
-                //     totalPriceElement: totalPriceElement.textContent,
-                //     displayPrice: displayPrice.textContent,
-                //     priceInput: priceInput.value
-                // });
-            }
+$(document).ready(function() {
+    // Константы для цен и настроек
+    const PRICES = {
+        weekday: 9000,  // Цена в будни
+        weekend: 12000, // Цена в выходные
+        discounts: {
+            '3-6': 0.95,  // Скидка 5% для 3-6 ночей
+            '7+': 0.90    // Скидка 10% для 7+ ночей
         }
-    });
-    
-    // Функция для форматирования даты в читаемый формат
-    function formatDate(date) {
-        const options = { day: 'numeric', month: 'long', year: 'numeric' };
-        return date.toLocaleDateString('ru-RU', options);
+    };
+
+   // Инициализация календаря Flatpickr
+const bookingCalendar = flatpickr("#booking-calendar", {
+    inline: true,
+    mode: "range",
+    minDate: "today",
+    dateFormat: "Y-m-d",
+    locale: "ru",
+    showMonths: window.innerWidth < 768 ? 1 : 2,
+    animate: true,
+    disableMobile: true,
+    static: true,
+    monthSelectorType: "static",
+    yearSelectorType: "static",
+    nextArrow: '<i class="fas fa-chevron-right"></i>',
+    prevArrow: '<i class="fas fa-chevron-left"></i>',
+    disable: [], // Здесь можно добавить заблокированные даты
+    onChange: handleDateSelection,
+    onReady: function(selectedDates, dateStr, instance) {
+        // Устанавливаем ширину календаря после инициализации
+        const calendarWidth = instance.calendarContainer.offsetWidth;
+        instance.calendarContainer.style.width = `${calendarWidth}px`;
+        
+        // Обновляем положение календаря
+        instance.calendarContainer.style.left = '0';
+        instance.calendarContainer.style.right = 'auto';
     }
+});
+
+// Обработка изменения размера окна
+$(window).resize(function() {
+    const width = window.innerWidth;
+    bookingCalendar.set('showMonths', width < 768 ? 1 : 2);
     
-    // Функция для форматирования даты для отправки на сервер (YYYY-MM-DD)
+    // Переустанавливаем размеры календаря после изменения окна
+    setTimeout(() => {
+        const calendarContainer = bookingCalendar.calendarContainer;
+        const calendarWidth = calendarContainer.offsetWidth;
+        calendarContainer.style.width = `${calendarWidth}px`;
+        calendarContainer.style.left = '0';
+        calendarContainer.style.right = 'auto';
+    }, 100);
+});
+
+    // Инициализация маски для телефона
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        const phoneMask = IMask(phoneInput, {
+            mask: '+{7} (000) 000-00-00',
+            lazy: false,
+            placeholderChar: '_',
+            prepare: function(str) {
+                return str.replace(/[^0-9]/g, '');
+            },
+            commit: function(value, masked) {
+                validateField(phoneInput);
+            },
+            complete: function(value, masked) {
+                $(phoneInput).removeClass('is-invalid').addClass('is-valid');
+            }
+        });
+    }
+
+    // Обработка выбора дат
+    function handleDateSelection(selectedDates, dateStr, instance) {
+        if (selectedDates.length === 2) {
+            const [checkIn, checkOut] = selectedDates;
+            
+            // Проверяем корректность дат
+            if (checkOut <= checkIn) {
+                showNotification('danger', 'Дата выезда должна быть позже даты заезда');
+                instance.clear();
+                return;
+            }
+
+            updateDateDisplay(checkIn, checkOut);
+            updatePriceDisplay(checkIn, checkOut);
+            updateFormInputs(checkIn, checkOut);
+
+            // Анимация обновления цены
+            $('#total-price').addClass('price-updated');
+            setTimeout(() => {
+                $('#total-price').removeClass('price-updated');
+            }, 500);
+        }
+    }
+
+    // Обновление отображения дат
+    function updateDateDisplay(checkIn, checkOut) {
+        const checkInEl = $('#check-in-date');
+        const checkOutEl = $('#check-out-date');
+        const nightsEl = $('#total-nights');
+
+        checkInEl.text(formatDate(checkIn)).addClass('date-updated');
+        checkOutEl.text(formatDate(checkOut)).addClass('date-updated');
+        nightsEl.text(calculateNights(checkIn, checkOut));
+
+        setTimeout(() => {
+            checkInEl.removeClass('date-updated');
+            checkOutEl.removeClass('date-updated');
+        }, 500);
+    }
+
+    // Обновление отображения цены
+    function updatePriceDisplay(checkIn, checkOut) {
+        const price = calculateTotalPrice(checkIn, checkOut);
+        const priceEl = $('#total-price');
+        const oldPrice = parseInt(priceEl.text().replace(/[^\d]/g, '')) || 0;
+
+        // Анимация изменения цены
+        $({price: oldPrice}).animate({price: price}, {
+            duration: 500,
+            easing: 'swing',
+            step: function(now) {
+                priceEl.text(formatPrice(Math.round(now)));
+            }
+        });
+
+        $('#price').val(price);
+    }
+
+    // Обновление скрытых полей формы
+    function updateFormInputs(checkIn, checkOut) {
+        $('#check-in').val(formatDateForServer(checkIn));
+        $('#check-out').val(formatDateForServer(checkOut));
+        $('#nights').val(calculateNights(checkIn, checkOut));
+    }
+
+    // Расчет количества ночей
+    function calculateNights(checkIn, checkOut) {
+        return Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+    }
+
+    // Расчет полной стоимости
+    function calculateTotalPrice(checkIn, checkOut) {
+        let totalPrice = 0;
+        const nights = calculateNights(checkIn, checkOut);
+        let currentDate = new Date(checkIn);
+
+        // Расчет базовой стоимости
+        while (currentDate < checkOut) {
+            const dayOfWeek = currentDate.getDay();
+            const isWeekend = (dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0);
+            totalPrice += isWeekend ? PRICES.weekend : PRICES.weekday;
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
+
+        // Применение скидок
+        if (nights >= 7) {
+            totalPrice *= PRICES.discounts['7+'];
+        } else if (nights >= 3) {
+            totalPrice *= PRICES.discounts['3-6'];
+        }
+
+        return Math.round(totalPrice);
+    }
+
+    // Форматирование даты для отображения
+    function formatDate(date) {
+        return date.toLocaleDateString('ru-RU', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+    }
+
+    // Форматирование даты для сервера
     function formatDateForServer(date) {
         return date.toISOString().split('T')[0];
     }
-    
-    // Функция для форматирования цены (добавление разделителей тысяч и символа валюты)
+
+    // Форматирование цены
     function formatPrice(price) {
-        return `${Number(price).toLocaleString('ru-RU')} ₽`;
-    }
-    
-    // Функция для расчета количества ночей между датами
-    function calculateNights(checkIn, checkOut) {
-        const timeDiff = Math.abs(checkOut.getTime() - checkIn.getTime());
-        return Math.ceil(timeDiff / (1000 * 3600 * 24));
-    }
-    
-    // Функция для определения, является ли день выходным (Пт, Сб, Вс)
-    function isWeekend(date) {
-        const day = date.getDay();
-        // 5 = пятница, 6 = суббота, 0 = воскресенье
-        return day === 5 || day === 6 || day === 0;
-    }
-    
-    // Функция для расчета стоимости с учетом дней недели
-    function calculatePriceByDays(checkIn, checkOut) {
-        if (!checkIn || !checkOut) {
-            return 0;
-        }
-        
-        let totalPrice = 0;
-        let currentDate = new Date(checkIn);
-        
-        // Перебираем каждый день проживания
-        while (currentDate < checkOut) {
-            // Определяем цену в зависимости от дня недели
-            if (isWeekend(currentDate)) {
-                totalPrice += weekendPrice;
-            } else {
-                totalPrice += weekdayPrice;
-            }
-            
-            // Переходим к следующему дню
-            currentDate.setDate(currentDate.getDate() + 1);
-        }
-        
-        // Применяем скидки за длительное проживание
-        const nights = calculateNights(checkIn, checkOut);
-        
-        if (nights >= 7) {
-            // Скидка 10% при бронировании от 7 ночей
-            totalPrice = Math.round(totalPrice * 0.9);
-        } else if (nights >= 3) {
-            // Скидка 5% при бронировании от 3 до 6 ночей
-            totalPrice = Math.round(totalPrice * 0.95);
-        }
-        
-        return totalPrice;
+        return price.toLocaleString('ru-RU') + ' ₽';
     }
 
-    // Функция для форматирования даты для отправки на сервер (YYYY-MM-DD)
-    function formatDateForServer(date) {
-    // Создаем копию даты и устанавливаем время на полдень, чтобы избежать проблем с часовыми поясами
-        const d = new Date(date);
-        d.setHours(12, 0, 0, 0);
-        return d.toISOString().split('T')[0];
-    }
-    
-    // Маска для телефона с поддержкой различных форматов
-    const phoneInput = document.getElementById('phone');
-    if (phoneInput) {
-        phoneInput.addEventListener('input', function(e) {
-            // Получаем только цифры из введенного значения
-            let digits = e.target.value.replace(/\D/g, '');
-            
-            // Ограничиваем длину до 11 цифр
-            if (digits.length > 11) {
-                digits = digits.substring(0, 11);
-            }
-            
-            // Форматируем по маске в зависимости от количества цифр
-            let formatted = '';
-            
-            if (digits.length === 0) {
-                formatted = '';
-            } else if (digits.length <= 1) {
-                formatted = '+' + digits;
-            } else if (digits.length <= 4) {
-                formatted = '+' + digits[0] + ' (' + digits.substring(1);
-            } else if (digits.length <= 7) {
-                formatted = '+' + digits[0] + ' (' + digits.substring(1, 4) + ') ' + digits.substring(4);
-            } else if (digits.length <= 9) {
-                formatted = '+' + digits[0] + ' (' + digits.substring(1, 4) + ') ' + digits.substring(4, 7) + '-' + digits.substring(7);
-            } else {
-                formatted = '+' + digits[0] + ' (' + digits.substring(1, 4) + ') ' + digits.substring(4, 7) + '-' + 
-                        digits.substring(7, 9) + '-' + digits.substring(9);
-            }
-            
-            e.target.value = formatted;
-        });
+    // Валидация полей формы при вводе
+    $('.form-control, .form-select').on('input change', function() {
+        validateField(this);
+    });
+
+    // Функция валидации поля
+    function validateField(field) {
+        const $field = $(field);
+        if (field.checkValidity()) {
+            $field.removeClass('is-invalid').addClass('is-valid');
+        } else {
+            $field.removeClass('is-valid').addClass('is-invalid');
+        }
     }
 
-    // Валидация и отправка формы
-    const bookingForm = document.getElementById('booking-form');
-    const submitButton = bookingForm && bookingForm.querySelector('button[type="submit"]');
+    // Обработка отправки формы
+    $('#booking-form').on('submit', function(e) {
+        e.preventDefault();
+        
+        if (!validateForm(this)) {
+            return;
+        }
 
-    if (bookingForm) {
-        bookingForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Проверка выбора дат
-            if (!checkInInput.value || !checkOutInput.value) {
-                showMessage('error', 'Пожалуйста, выберите даты заезда и выезда');
-                return;
-            }
-            
-            // Получаем значения полей
-            const guests = document.getElementById('guests').value;
-            const lastname = document.getElementById('lastname').value.trim();
-            const firstname = document.getElementById('firstname').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const comments = document.getElementById('comments').value.trim();
-            const agree = document.getElementById('agree').checked;
-            
-            // Проверка обязательных полей
-            if (!guests) {
-                showMessage('error', 'Пожалуйста, выберите количество гостей');
-                return;
-            }
-            
-            if (!lastname) {
-                showMessage('error', 'Пожалуйста, введите фамилию');
-                return;
-            }
-            
-            if (!firstname) {
-                showMessage('error', 'Пожалуйста, введите имя');
-                return;
-            }
-            
-            if (!phone) {
-                showMessage('error', 'Пожалуйста, введите номер телефона');
-                return;
-            }
-            
-            if (!agree) {
-                showMessage('error', 'Необходимо согласиться с правилами проживания');
-                return;
-            }
-            
-            // Проверка формата телефона - принимаем любой формат, содержащий не менее 10 цифр
-            const phoneDigits = phone.replace(/\D/g, '');
-            if (phoneDigits.length < 10) {
-                showMessage('error', 'Пожалуйста, введите корректный номер телефона (не менее 10 цифр)');
-                return;
-            }
-            
-            // Если email заполнен, проверяем его формат
-            if (email) {
-                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailPattern.test(email)) {
-                    showMessage('error', 'Пожалуйста, введите корректный email');
-                    return;
+        const submitBtn = $(this).find('button[type="submit"]');
+        const originalBtnText = submitBtn.html();
+        
+        // Анимация кнопки отправки
+        submitBtn.prop('disabled', true)
+            .html('<span class="spinner-border spinner-border-sm me-2"></span>Отправка...');
+
+        // AJAX отправка формы
+        $.ajax({
+            url: $(this).attr('action'),
+            method: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                if (response.success) {
+                    showNotification('success', response.message);
+                    resetForm();
+                } else {
+                    showNotification('danger', response.message || 'Произошла ошибка при бронировании');
                 }
-            }
-            
-            // Принудительно пересчитываем стоимость перед отправкой
-            const checkInDate = checkInInput.value ? new Date(checkInInput.value) : null;
-            const checkOutDate = checkOutInput.value ? new Date(checkOutInput.value) : null;
-            
-            if (checkInDate && checkOutDate) {
-                const price = calculatePriceByDays(checkInDate, checkOutDate);
-                priceInput.value = price;
-                totalPriceElement.textContent = formatPrice(price);
-                displayPrice.textContent = formatPrice(price);
-            }
-            
-            // Блокируем кнопку отправки и меняем текст
-            submitButton.disabled = true;
-            submitButton.innerHTML = 'Отправка...';
-            
-            // Создаем объект FormData для отправки данных формы
-            const formData = new FormData(bookingForm);
-            
-            // Проверяем, что цена и ночи добавлены в formData
-            if (!formData.has('price') || formData.get('price') === '0' || formData.get('price') === '') {
-                const recalculatedPrice = checkInDate && checkOutDate ? 
-                    calculatePriceByDays(checkInDate, checkOutDate) : 0;
-                formData.set('price', recalculatedPrice);
-            }
-            
-            if (!formData.has('nights') || formData.get('nights') === '0' || formData.get('nights') === '') {
-                const nights = checkInDate && checkOutDate ? calculateNights(checkInDate, checkOutDate) : 0;
-                formData.set('nights', nights);
-            }
-            
-            // Отправляем данные на сервер с помощью Fetch API
-            fetch('bookingprocess.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    let successMessage = data.message;
-                    
-                    // Если есть номер бронирования, добавляем его в сообщение
-                    if (data.booking_id) {
-                        successMessage += ` Номер вашего бронирования: ${data.booking_id}.`;
-                    }
-                    
-                    showMessage('success', successMessage);
-                    bookingForm.reset();
-                    
-                    // Сбрасываем календарь и информацию о датах
-                    bookingCalendar.clear();
-                    checkInDateElement.textContent = 'Не выбрано';
-                    checkOutDateElement.textContent = 'Не выбрано';
-                    totalNightsElement.textContent = '0';
-                    totalPriceElement.textContent = '0 ₽';
-                    displayCheckIn.textContent = 'Выберите дату';
-                    displayCheckOut.textContent = 'Выберите дату';
-                    displayPrice.textContent = '0 ₽';
+            },
+            error: function(xhr) {
+                let errorMessage = 'Произошла ошибка при отправке формы';
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    errorMessage = xhr.responseJSON.message;
                 }
-            })
-            .catch(error => {
-                showMessage('error', 'Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже.');
-                console.error('Error:', error);
-            })
-            .finally(() => {
-                // Разблокируем кнопку отправки и возвращаем исходный текст
-                submitButton.disabled = false;
-                submitButton.innerHTML = 'Забронировать';
-            });
+                showNotification('danger', errorMessage);
+            },
+            complete: function() {
+                submitBtn.prop('disabled', false).html(originalBtnText);
+            }
         });
-    }
-    
-    // Функция для отображения сообщений
-    function showMessage(type, text) {
-        // Удаляем предыдущие сообщения
-        const oldMessages = document.querySelectorAll('.form-message');
-        oldMessages.forEach(msg => msg.remove());
-        
-        // Создаем новое сообщение
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `form-message ${type === 'success' ? 'form-message-success' : 'form-message-error'}`;
-        messageDiv.textContent = text;
-        
-        // Добавляем сообщение после кнопки отправки
-        const submitButton = document.querySelector('.btn-book');
-        if (submitButton) {
-            submitButton.parentNode.insertAdjacentElement('afterend', messageDiv);
-            
-            // Прокручиваем к сообщению
-            messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    // Валидация формы
+    function validateForm(form) {
+        let isValid = true;
+        const requiredFields = $(form).find('[required]');
+
+        // Проверка всех обязательных полей
+        requiredFields.each(function() {
+            if (!this.checkValidity()) {
+                $(this).addClass('is-invalid');
+                isValid = false;
+            } else {
+                $(this).removeClass('is-invalid');
+            }
+        });
+
+        // Проверка выбора дат
+        if (!$('#check-in').val() || !$('#check-out').val()) {
+            showNotification('danger', 'Пожалуйста, выберите даты проживания');
+            isValid = false;
         }
-        
-        // Если сообщение успешное, удаляем его через 10 секунд
-        if (type === 'success') {
-            setTimeout(() => {
-                messageDiv.remove();
-            }, 10000);
+
+        // Проверка согласия с правилами
+        if (!$('#agree').is(':checked')) {
+            $('#agree').addClass('is-invalid');
+            showNotification('danger', 'Необходимо согласиться с правилами проживания');
+            isValid = false;
         }
+
+        if (!isValid) {
+            // Прокрутка к первому невалидному полю
+            const firstInvalid = $(form).find('.is-invalid').first();
+            if (firstInvalid.length) {
+                $('html, body').animate({
+                    scrollTop: firstInvalid.offset().top - 100
+                }, 500);
+            }
+        }
+
+        return isValid;
     }
-    
-    // Обновление размера календаря при изменении размера окна
-    window.addEventListener('resize', function() {
+
+    // Сброс формы
+    function resetForm() {
+        const form = $('#booking-form')[0];
+        form.reset();
+        bookingCalendar.clear();
+        
+        // Сброс отображения дат и цены
+        $('#check-in-date').text('Не выбрано');
+        $('#check-out-date').text('Не выбрано');
+        $('#total-nights').text('0');
+        $('#total-price').text('0 ₽');
+        
+        // Удаление классов валидации
+        $('.is-valid, .is-invalid').removeClass('is-valid is-invalid');
+    }
+
+    // Показ уведомлений
+    function showNotification(type, message) {
+        const notificationHtml = `
+            <div class="alert alert-${type} alert-dismissible fade show notification-slide" role="alert">
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        `;
+
+        const notification = $(notificationHtml);
+        $('.booking-notifications').append(notification);
+
+        // Анимация появления
+        setTimeout(() => notification.addClass('show'), 100);
+
+        // Автоматическое скрытие
+        setTimeout(() => {
+            notification.removeClass('show');
+            setTimeout(() => notification.remove(), 300);
+        }, 5000);
+    }
+
+    // Обработка изменения размера окна
+    $(window).resize(function() {
         bookingCalendar.set('showMonths', window.innerWidth < 768 ? 1 : 2);
         bookingCalendar.redraw();
     });
+
+    // Инициализация тултипов и попоперов
+    $('[data-bs-toggle="tooltip"]').tooltip();
+    $('[data-bs-toggle="popover"]').popover();
 });
