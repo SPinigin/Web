@@ -74,6 +74,36 @@ $(document).ready(function() {
         }
     });
 
+    $(document).ready(function() {
+    // Закрытие меню при клике вне его
+    $(document).on('click', function(e) {
+        const $navbarCollapse = $('.navbar-collapse');
+        const $navbarToggler = $('.navbar-toggler');
+        
+        if ($navbarCollapse.hasClass('show')) {
+            if (!$(e.target).closest('.navbar-collapse').length && 
+                !$(e.target).closest('.navbar-toggler').length) {
+                
+                // Добавляем плавную анимацию
+                $navbarCollapse.removeClass('show');
+                setTimeout(() => {
+                    $navbarToggler.attr('aria-expanded', 'false');
+                    $navbarCollapse.removeClass('collapsing').addClass('collapse');
+                }, 300);
+            }
+        }
+    });
+
+    // Добавляем обработчик для плавного закрытия при клике на пункты меню
+    $('.navbar-nav .nav-link').on('click', function() {
+        const $navbarCollapse = $('.navbar-collapse');
+        if ($navbarCollapse.hasClass('show')) {
+            $navbarCollapse.removeClass('show');
+            $('.navbar-toggler').attr('aria-expanded', 'false');
+        }
+    });
+});
+
     // Обработка форм
     $('form').on('submit', function(e) {
         const form = $(this);
