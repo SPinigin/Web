@@ -1,4 +1,4 @@
-// Проверяем тему из localStorage при загрузке
+// тема из localstorage
 document.addEventListener('DOMContentLoaded', function() {
     if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-mode');
@@ -15,34 +15,29 @@ document.addEventListener('DOMContentLoaded', function() {
     // Инициализация формы
     updateFormFields('student');
     
-    // Обработчик отправки формы
+    // отправка формы
     const form = document.querySelector('form');
     form.addEventListener('submit', function(e) {
-        // Предотвращаем отправку формы по умолчанию
         e.preventDefault();
         
-        // Проверяем совпадение паролей
+        // проверка совпадения паролей
         if (validateForm()) {
-            // Если валидация успешна, можно отправить форму
             this.submit();
         }
     });
-    
-    // Обработчики событий для проверки паролей при вводе
+
     const passwordField = document.getElementById('password');
     const confirmPasswordField = document.getElementById('passwordapproval');
     
-    // Проверка при изменении поля пароля
     passwordField.addEventListener('input', function() {
         if (confirmPasswordField.value) {
             validatePasswordMatch();
         }
     });
     
-    // Проверка при изменении поля подтверждения пароля
     confirmPasswordField.addEventListener('input', validatePasswordMatch);
     
-    // Обработчики для кнопок "глазик"
+    // показать пароль
     const passwordToggles = document.querySelectorAll('.password-toggle');
     passwordToggles.forEach(toggle => {
         toggle.addEventListener('click', function() {
@@ -63,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Функция обновления полей формы в зависимости от типа пользователя
+// поля в зависимости от пользователя
 function updateFormFields(userType) {
     const studentFields = document.getElementById('student-fields');
     const specialistFields = document.getElementById('specialist-fields');
@@ -72,7 +67,7 @@ function updateFormFields(userType) {
         specialistFields.classList.add('hidden');
         studentFields.classList.remove('hidden');
         
-        // Сделаем поля студента обязательными, а поле специалиста - нет
+        // для студента - обязательно, для специалиста нет
         document.getElementById('university').setAttribute('required', '');
         document.getElementById('group').setAttribute('required', '');
         document.getElementById('occupation').removeAttribute('required');
@@ -80,14 +75,14 @@ function updateFormFields(userType) {
         studentFields.classList.add('hidden');
         specialistFields.classList.remove('hidden');
         
-        // Сделаем поле специалиста обязательным, а поля студента - нет
+        // наоборот
         document.getElementById('occupation').setAttribute('required', '');
         document.getElementById('university').removeAttribute('required');
         document.getElementById('group').removeAttribute('required');
     }
 }
 
-// Функция валидации совпадения паролей
+// валидация паролей
 function validatePasswordMatch() {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('passwordapproval').value;
@@ -109,12 +104,11 @@ function validatePasswordMatch() {
     }
 }
 
-// Функция валидации всей формы
+// валидация всей формы
 function validateForm() {
-    // Проверка совпадения паролей
     const isPasswordValid = validatePasswordMatch();
     
-    // Здесь можно добавить другие проверки формы при необходимости
+    // добавить проверки всех полей формы
     
     return isPasswordValid;
 }

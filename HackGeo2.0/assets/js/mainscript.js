@@ -1,4 +1,4 @@
-// Функция переключения темы
+// переключатель темы
 function toggleBrightMode() {
     document.body.classList.toggle('dark-mode');
     
@@ -14,7 +14,7 @@ function toggleBrightMode() {
     }
 }
 
-// Функция для проверки размера экрана и адаптации меню
+// адаптация
 function checkScreenSize() {
     const isMobile = window.innerWidth <= 992;
     const menuButton = document.getElementById('main-menu-button');
@@ -26,56 +26,49 @@ function checkScreenSize() {
     } else {
         if (horizontalMenu) horizontalMenu.style.display = 'flex';
         if (menuButton) menuButton.style.display = 'none';
-        // Закрываем мобильное меню если оно было открыто
         document.querySelector('.wrap-main-menu').classList.remove('active');
         document.querySelector('.backgroundmenu').style.display = 'none';
     }
 }
 
-// Проверяем предпочтение пользователя при загрузке страницы
+// тема из localstorage
 document.addEventListener('DOMContentLoaded', function() {
-    // Применяем сохраненную тему
     if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-mode');
-        
-        // Обновляем состояние чекбокса
+
         const checkbox = document.getElementById('theme-toggle-checkbox');
         if (checkbox) {
             checkbox.checked = true;
         }
     }
     
-    // Добавляем обработчик для переключателя темы
     const themeToggle = document.getElementById('theme-toggle-checkbox');
     if (themeToggle) {
         themeToggle.addEventListener('change', toggleBrightMode);
     }
     
-    // Инициализация проверки размера экрана
     checkScreenSize();
     
-    // Обработчик для кнопки меню
     document.getElementById('main-menu-button').addEventListener('click', function() {
         document.querySelector('.wrap-main-menu').classList.toggle('active');
         document.querySelector('.backgroundmenu').style.display = 
             document.querySelector('.wrap-main-menu').classList.contains('active') ? 'block' : 'none';
     });
     
-    // Закрытие меню при клике на фон
+    // закрыть меню при клике на фон
     document.querySelector('.backgroundmenu').addEventListener('click', function() {
         document.querySelector('.wrap-main-menu').classList.remove('active');
         this.style.display = 'none';
     });
 });
 
-// Функция для проверки авторизации пользователя
+
 function checkAuth() {
-    // Здесь должна быть проверка авторизации через ваш бэкенд
-    // Пока используем localStorage для демонстрации
+    // доделать
     return localStorage.getItem('isAuthenticated') === 'true';
 }
 
-// Функция для обновления UI в зависимости от статуса авторизации
+// доделать
 function updateAuthUI() {
     const authButtons = document.getElementById('auth-buttons');
     const userProfile = document.getElementById('user-profile');
@@ -84,8 +77,6 @@ function updateAuthUI() {
     if (isAuthenticated) {
         authButtons.style.display = 'none';
         userProfile.style.display = 'block';
-        
-        // Обновляем имя пользователя
         const userName = localStorage.getItem('userName') || 'Пользователь';
         document.querySelector('.profile-name').textContent = userName;
     } else {
@@ -94,7 +85,6 @@ function updateAuthUI() {
     }
 }
 
-// Обработчик для выпадающего меню профиля
 function setupProfileDropdown() {
     const profileBtn = document.getElementById('profile-btn');
     const profileDropdown = document.getElementById('profile-dropdown');
@@ -104,8 +94,6 @@ function setupProfileDropdown() {
             e.stopPropagation();
             profileDropdown.classList.toggle('active');
         });
-
-        // Закрытие при клике вне меню
         document.addEventListener('click', (e) => {
             if (!profileDropdown.contains(e.target) && !profileBtn.contains(e.target)) {
                 profileDropdown.classList.remove('active');
@@ -114,7 +102,7 @@ function setupProfileDropdown() {
     }
 }
 
-// Обработчик для кнопки выхода
+//signout
 function setupLogout() {
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
@@ -126,17 +114,6 @@ function setupLogout() {
         });
     }
 }
-
-// Инициализация при загрузке страницы
-document.addEventListener('DOMContentLoaded', function() {
-    // Существующий код...
-
-    // Добавляем новые инициализации
-    updateAuthUI();
-    setupProfileDropdown();
-    setupLogout();
-});
-
 
 // Отслеживаем изменение размера окна
 window.addEventListener('resize', checkScreenSize);
