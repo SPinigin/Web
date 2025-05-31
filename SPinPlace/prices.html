@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Цены на проживание - Коттедж для отдыха</title>
+    
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Дополнительные стили для страницы с ценами */
+        .price-card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        
+        .price-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .price-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 20px;
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+        }
+        
+        .price-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 20px 0;
+        }
+        
+        .price-features {
+            padding: 0;
+            list-style: none;
+            margin: 0;
+        }
+        
+        .price-features li {
+            padding: 12px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .price-features li i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #dc3545;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .season-info {
+            background: var(--light-color);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .additional-services {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-home me-2"></i>Коттедж для отдыха
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="prices.html">Цены</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="booking.html">Бронирование</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacts.html">Контакты</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="page-header">
+        <div class="container">
+            <h1 class="text-center mb-3">Цены на проживание</h1>
+            <p class="text-center text-muted">Выберите подходящий вариант для вашего отдыха</p>
+        </div>
+    </section>
+
+    
+    <section class="prices-section py-5">
+        <div class="container">
+            
+            <div class="season-info text-center mb-5" data-aos="fade-up">
+                <h2 class="h3 mb-4">Стоимость проживания</h2>
+                <p class="lead mb-0">Цены варьируются в зависимости от сезона и дней недели</p>
+            </div>
+
+            
+            <div class="row g-4">
+                
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="price-card position-relative">
+                        <div class="price-header">
+                            <h3 class="h4 mb-0">Будни</h3>
+                            <p class="mb-0">Понедельник - Четверг</p>
+                        </div>
+                        <div class="price-body p-4 text-center">
+                            <div class="price-amount">9 000 ₽</div>
+                            <p class="text-muted mb-4">за ночь</p>
+                            <ul class="price-features text-start mb-4">
+                                <li><i class="fas fa-check"></i>Заезд после 14:00</li>
+                                <li><i class="fas fa-check"></i>Выезд до 12:00</li>
+                                <li><i class="fas fa-check"></i>До 6 гостей</li>
+                                <li><i class="fas fa-check"></i>Парковка</li>
+                                <li><i class="fas fa-check"></i>Wi-Fi</li>
+                            </ul>
+                            <a href="booking.html" class="btn btn-primary">Забронировать</a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="price-card position-relative">
+                        <div class="price-header">
+                            <h3 class="h4 mb-0">Выходные</h3>
+                            <p class="mb-0">Пятница - Воскресенье</p>
+                        </div>
+                        <div class="price-body p-4 text-center">
+                            <div class="price-amount">12 000 ₽</div>
+                            <p class="text-muted mb-4">за ночь</p>
+                            <ul class="price-features text-start mb-4">
+                                <li><i class="fas fa-check"></i>Заезд после 14:00</li>
+                                <li><i class="fas fa-check"></i>Выезд до 12:00</li>
+                                <li><i class="fas fa-check"></i>До 6 гостей</li>
+                                <li><i class="fas fa-check"></i>Парковка</li>
+                                <li><i class="fas fa-check"></i>Wi-Fi</li>
+                            </ul>
+                            <a href="booking.html" class="btn btn-primary">Забронировать</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="discounts mt-5" data-aos="fade-up">
+                <h3 class="text-center mb-4">Специальные предложения</h3>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-calendar-week fa-2x text-primary mb-3"></i>
+                                <h4 class="h5">От 3 ночей</h4>
+                                <p class="mb-0">Скидка 5% при бронировании от 3 ночей</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-calendar-alt fa-2x text-primary mb-3"></i>
+                                <h4 class="h5">От 7 ночей</h4>
+                                <p class="mb-0">Скидка 10% при бронировании от 7 ночей</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-users fa-2x text-primary mb-3"></i>
+                                <h4 class="h5">Группы</h4>
+                                <p class="mb-0">Специальные условия для групп от 4 человек</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="additional-services mt-5" data-aos="fade-up">
+                <h3 class="text-center mb-4">Дополнительные услуги</h3>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <i class="fas fa-broom text-primary me-2"></i>
+                                Дополнительная уборка: 2000 ₽
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-utensils text-primary me-2"></i>
+                                Организация питания: по запросу
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <i class="fas fa-car text-primary me-2"></i>
+                                Трансфер: по запросу
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-snowflake text-primary me-2"></i>
+                                Дополнительные принадлежности: по запросу
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="booking-rules mt-5" data-aos="fade-up">
+                <h3 class="text-center mb-4">Правила бронирования</h3>
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+                        <div class="card">
+                            <div class="card-body">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-3">
+                                        <i class="fas fa-clock text-primary me-2"></i>
+                                        Заезд после 14:00, выезд до 12:00
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="fas fa-calendar-check text-primary me-2"></i>
+                                        Предоплата 30% для подтверждения бронирования
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="fas fa-ban text-primary me-2"></i>
+                                        Отмена бронирования возможна за 7 дней
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-shield-alt text-primary me-2"></i>
+                                        Страховой депозит 5000 ₽ (возвращается при выезде)
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="text-center mt-5" data-aos="fade-up">
+                <h3 class="mb-4">Готовы забронировать?</h3>
+                <a href="booking.html" class="btn btn-primary btn-lg">
+                    <i class="fas fa-calendar-check me-2"></i>Забронировать сейчас
+                </a>
+            </div>
+        </div>
+    </section>
+
+    
+    <footer class="py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p>&copy; 2025 Коттедж для отдыха. Все права защищены.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="social-link me-3"><i class="fab fa-vk"></i></a>
+                    <a href="#" class="social-link me-3"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
