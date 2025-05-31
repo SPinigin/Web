@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правила проживания - Коттедж для отдыха</title>
+    
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Дополнительные стили для страницы правил */
+        .rules-section {
+            background-color: #fff;
+            padding: 50px 0;
+        }
+        
+        .rule-card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            height: 100%;
+            padding: 25px;
+        }
+        
+        .rule-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .rule-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .rule-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .rule-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: start;
+        }
+        
+        .rule-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .rule-list li i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            margin-top: 4px;
+        }
+        
+        .important-notice {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .important-notice i {
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-home me-2"></i>Коттедж для отдыха
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="rules.html">Правила</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="booking.html">Бронирование</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacts.html">Контакты</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="page-header">
+        <div class="container">
+            <h1 class="text-center mb-3">Правила проживания</h1>
+            <p class="text-center text-muted">Пожалуйста, ознакомьтесь с правилами перед бронированием</p>
+        </div>
+    </section>
+
+    
+    <section class="rules-section">
+        <div class="container">
+            
+            <div class="row g-4 mb-5">
+                <div class="col-md-6" data-aos="fade-up">
+                    <div class="rule-card">
+                        <div class="text-center">
+                            <i class="fas fa-clock rule-icon"></i>
+                            <h3 class="h4 mb-4">Время заезда и выезда</h3>
+                        </div>
+                        <ul class="rule-list">
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Заезд после 14:00</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Выезд до 12:00</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-info-circle"></i>
+                                <span>Ранний заезд и поздний выезд возможны по предварительной договоренности</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="rule-card">
+                        <div class="text-center">
+                            <i class="fas fa-users rule-icon"></i>
+                            <h3 class="h4 mb-4">Размещение гостей</h3>
+                        </div>
+                        <ul class="rule-list">
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Максимальное количество гостей: 6 человек</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Дети до 3 лет размещаются бесплатно</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span>Размещение с домашними животными запрещено</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="row g-4 mb-5">
+                <div class="col-12" data-aos="fade-up">
+                    <div class="rule-card">
+                        <div class="text-center">
+                            <i class="fas fa-hand-point-right rule-icon"></i>
+                            <h3 class="h4 mb-4">Правила поведения</h3>
+                        </div>
+                        <ul class="rule-list">
+                            <li>
+                                <i class="fas fa-ban"></i>
+                                <span>Курение в помещении строго запрещено. Разрешено только в специально отведенных местах</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-volume-mute"></i>
+                                <span>Соблюдение тишины с 23:00 до 08:00</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <span>Запрещено проведение шумных мероприятий и вечеринок без предварительного согласования</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-trash-alt"></i>
+                                <span>Поддержание чистоты и порядка в коттедже и на прилегающей территории</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="row g-4 mb-5">
+                <div class="col-md-6" data-aos="fade-up">
+                    <div class="rule-card">
+                        <div class="text-center">
+                            <i class="fas fa-money-bill-wave rule-icon"></i>
+                            <h3 class="h4 mb-4">Оплата</h3>
+                        </div>
+                        <ul class="rule-list">
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Предоплата 30% для подтверждения бронирования</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Полная оплата производится при заезде</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Страховой депозит: 5000 ₽ (возвращается при выезде)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="rule-card">
+                        <div class="text-center">
+                            <i class="fas fa-calendar-alt rule-icon"></i>
+                            <h3 class="h4 mb-4">Отмена бронирования</h3>
+                        </div>
+                        <ul class="rule-list">
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Бесплатная отмена за 7 дней до заезда</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span>При отмене менее чем за 7 дней предоплата не возвращается</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-info-circle"></i>
+                                <span>Возможен перенос дат проживания по согласованию</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="important-notice" data-aos="fade-up">
+                <div class="row align-items-center">
+                    <div class="col-md-1 text-center mb-3 mb-md-0">
+                        <i class="fas fa-exclamation-circle fa-3x"></i>
+                    </div>
+                    <div class="col-md-11">
+                        <h4 class="h5 mb-2">Важно!</h4>
+                        <p class="mb-0">Нарушение правил проживания может привести к досрочному выселению без возврата оплаты. Мы оставляем за собой право отказать в бронировании без объяснения причин.</p>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="text-center mt-5" data-aos="fade-up">
+                <p class="mb-4">Ознакомились с правилами и готовы забронировать?</p>
+                <a href="booking.html" class="btn btn-primary btn-lg">
+                    <i class="fas fa-calendar-check me-2"></i>Перейти к бронированию
+                </a>
+            </div>
+        </div>
+    </section>
+
+    
+    <footer class="py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p>&copy; 2025 Коттедж для отдыха. Все права защищены.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="social-link me-3"><i class="fab fa-vk"></i></a>
+                    <a href="#" class="social-link me-3"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
