@@ -28,19 +28,11 @@ h1, h2, h3, h4, h5, h6 {
     height: 90px;
 }
 
-.navbar-wrapper {
-    position: relative;
-}
-
 .navbar-brand {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
     color: var(--primary-color) !important;
     font-size: 28px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    margin: 0;
 }
 
 .navbar-nav {
@@ -71,43 +63,52 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: 8px;
 }
 
-.navbar-toggler {
-    padding: 10px 15px;
-    font-size: 20px;
+/* Медиа-запросы для адаптивности */
+@media (min-width: 992px) {
+    .navbar > .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navbar-collapse {
+        flex-grow: 0;
+    }
+
+    .navbar-nav {
+        margin-left: auto;
+    }
 }
 
-.navbar-collapse {
-    transition: all 0.3s ease-in-out;
-}
-
-.navbar-collapse.collapsing {
-    height: auto;
-    transition: all 0.3s ease-in-out;
-    opacity: 0;
-}
-
-.navbar-collapse.show {
-    opacity: 1;
-}
-
-/* Анимация для мобильного меню */
 @media (max-width: 991.98px) {
     .navbar-collapse {
-        transform: translateY(-10px);
-        opacity: 0;
-        transition: all 0.3s ease;
-        visibility: hidden;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        margin-top: 10px;
     }
 
-    .navbar-collapse.show {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
+    .navbar-nav {
+        gap: 10px;
     }
 
-    .navbar-collapse.collapsing {
-        transform: translateY(-10px);
-        opacity: 0;
+    .nav-link {
+        text-align: center;
+        padding: 10px !important;
+    }
+
+    .navbar-toggler {
+        padding: 10px 15px;
+        border: none;
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: none;
     }
 }
 
