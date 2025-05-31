@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Коттедж для отдыха</title>
+    
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    
+    <script src="https://maps.api.2gis.ru/2.0/loader.js"></script>
+    
+    
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        .contact-section {
+            padding: 50px 0;
+        }
+        
+        .contact-card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            margin-bottom: 30px;
+        }
+        
+        .contact-info a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-info a:hover {
+            color: var(--primary-color);
+        }
+        
+        .social-links {
+            margin-top: 30px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .map-container {
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        
+        .contact-form .form-control {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .contact-form .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 73, 94, 0.25);
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-home me-2"></i>Коттедж для отдыха
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">Галерея</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="prices.html">Цены</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="booking.html">Бронирование</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="map.html">Карта</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="rules.html">Правила</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contacts.html">Контакты</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="page-header">
+        <div class="container">
+            <h1 class="text-center mb-3">Контакты</h1>
+            <p class="text-center text-muted">Свяжитесь с нами любым удобным способом</p>
+        </div>
+    </section>
+
+    
+    <section class="contact-section">
+        <div class="container">
+            <div class="row g-4 mb-5">
+                
+                <div class="col-md-4">
+                    <div class="contact-card text-center">
+                        <i class="fas fa-phone contact-icon"></i>
+                        <h3 class="h4 mb-4">Телефон</h3>
+                        <p class="mb-2">Звоните в любое время:</p>
+                        <a href="tel:+79324779622" class="h5 mb-0">+7 (932) 477-96-22</a>
+                    </div>
+                </div>
+
+                
+                <div class="col-md-4">
+                    <div class="contact-card text-center">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <h3 class="h4 mb-4">Email</h3>
+                        <p class="mb-2">Пишите нам:</p>
+                        <a href="mailto:pinigin09@yandex.ru" class="h5 mb-0">pinigin09@yandex.ru</a>
+                    </div>
+                </div>
+
+                
+                <div class="col-md-4">
+                    <div class="contact-card text-center">
+                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                        <h3 class="h4 mb-4">Адрес</h3>
+                        <p class="mb-2">Мы находимся:</p>
+                        <p class="h5 mb-0">с.Перевалово, Боровская 15</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="contact-card">
+                        <h3 class="h4 mb-4">Напишите нам</h3>
+                        <form class="contact-form" id="contactForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Ваше имя</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Телефон</label>
+                                <input type="tel" class="form-control" id="phone">
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Сообщение</label>
+                                <textarea class="form-control" id="message" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane me-2"></i>Отправить
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                
+                <div class="col-lg-6">
+                    <div class="map-container">
+                        <div id="map" style="width: 100%; height: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="text-center mt-5">
+                <h3 class="h4 mb-4">Мы в социальных сетях</h3>
+                <div class="social-links">
+                    <a href="#" title="VKontakte"><i class="fab fa-vk"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="Telegram"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <footer class="py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p>&copy; 2025 Коттедж для отдыха. Все права защищены.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="social-link me-3"><i class="fab fa-vk"></i></a>
+                    <a href="#" class="social-link me-3"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Инициализация карты 2ГИС
+        DG.then(function () {
+            var map = DG.map('map', {
+                center: [57.165380, 65.484710],
+                zoom: 16
+            });
+            
+            DG.marker([57.165380, 65.484710]).addTo(map)
+                .bindPopup('Коттедж для отдыха<br>с. Перевалово, Боровская 15');
+        });
+
+        // Обработка формы
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Здесь добавьте код для отправки формы
+            alert('Спасибо за сообщение! Мы свяжемся с вами в ближайшее время.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
