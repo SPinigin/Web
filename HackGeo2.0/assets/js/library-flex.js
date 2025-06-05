@@ -2,6 +2,7 @@ $(document).ready(function() {
     // Загрузка книг
     loadBooks();
     
+    // Обработка модальных окон
     const uploadModal = document.getElementById('upload-modal');
     const uploadBtn = document.getElementById('upload-book-btn');
     const closeBtn = uploadModal.querySelector('.close');
@@ -22,7 +23,7 @@ $(document).ready(function() {
         document.body.style.overflow = '';
     });
     
-    // закрыть окно при клике вне
+    // Закрытие модального окна при клике вне его области
     window.addEventListener('click', function(event) {
         if (event.target === uploadModal) {
             uploadModal.style.display = 'none';
@@ -30,6 +31,7 @@ $(document).ready(function() {
         }
     });
     
+    // Обработка выбора файла
     const bookFileInput = document.getElementById('book-file');
     const bookFileNameDisplay = bookFileInput.nextElementSibling.querySelector('.file-name');
     const bookCoverInput = document.getElementById('book-cover');
@@ -51,7 +53,7 @@ $(document).ready(function() {
         }
     });
     
-    // кнопка "Обзор"
+    // Кнопка "Обзор"
     const browseButtons = document.querySelectorAll('.browse-btn');
     browseButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -59,68 +61,53 @@ $(document).ready(function() {
         });
     });
     
-    // отправка формы
+    // Отправка формы загрузки книги
     const uploadForm = document.getElementById('upload-book-form');
     uploadForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
         const formData = new FormData(this);
         
-        // загрузка...
+        // Имитация загрузки
         const submitBtn = this.querySelector('.submit-btn');
         const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Загрузка...';
         submitBtn.disabled = true;
         
-        fetch('/api/upload-book.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // успешная загрузка
-                alert('Книга успешно загружена!');
-                uploadModal.style.display = 'none';
-                document.body.style.overflow = '';
-                
-                // очистка формы
-                uploadForm.reset();
-                bookFileNameDisplay.textContent = 'Файл не выбран';
-                bookCoverNameDisplay.textContent = 'Файл не выбран';
-                
-                // загрузка списка заново
-                loadBooks();
-            } else {
-                // Ошибка
-                alert('Ошибка: ' + (data.message || 'Не удалось загрузить книгу'));
-            }
-        })
-        .catch(error => {
-            console.error('Ошибка:', error);
-            alert('Произошла ошибка при загрузке книги');
-        })
-        .finally(() => {
+        // Имитация запроса к серверу
+        setTimeout(() => {
+            alert('Книга успешно загружена!');
+            uploadModal.style.display = 'none';
+            document.body.style.overflow = '';
+            
+            // Очистка формы
+            uploadForm.reset();
+            bookFileNameDisplay.textContent = 'Файл не выбран';
+            bookCoverNameDisplay.textContent = 'Файл не выбран';
+            
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
-        });
+            
+            // Обновление списка книг
+            loadBooks();
+        }, 1500);
     });
     
-    // поиск книг
+    // Поиск книг
     const searchInput = document.getElementById('book-search');
     searchInput.addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase();
         filterBooks(searchTerm);
     });
     
-    // фильтр
+    // Фильтр по предметам
     const subjectFilter = document.getElementById('subject-filter');
     subjectFilter.addEventListener('change', function() {
         const selectedSubject = this.value;
         filterBySubject(selectedSubject);
     });
     
-    // инфо о книге
+    // Модальное окно информации о книге
     const bookInfoModal = document.getElementById('book-info-modal');
     const bookInfoCloseBtn = bookInfoModal.querySelector('.close');
     
@@ -135,58 +122,115 @@ $(document).ready(function() {
             document.body.style.overflow = '';
         }
     });
+    
+    // Отключение стандартного контекстного меню только для книг
+    $(document).on('contextmenu', '.book', function(e) {
+        e.preventDefault();
+        
+        // Показываем кастомное контекстное меню
+        const customContextMenu = $('#custom-context-menu');
+        customContextMenu.css({
+            'display': 'block',
+            'left': e.pageX,
+            'top': e.pageY
+        });
+        
+        // Сохраняем ссылку на элемент, на котором вызвано контекстное меню
+        customContextMenu.data('targetElement', $(this).attr('data-id'));
+        
+        return false;
+    });
+    
+    // Скрываем контекстное меню при клике левой кнопкой мыши
+    $(document).on('click', function() {
+        $('#custom-context-menu').hide();
+    });
+    
+    // Обработка пунктов контекстного меню
+    $('#context-view').click(function() {
+        const bookId = $('#custom-context-menu').data('targetElement');
+        if (bookId) {
+            const book = $(`.book[data-id="${bookId}"]`)[0];
+            if (book) {
+                showBookDetails(book);
+            }
+        }
+    });
+    
+    $('#context-download').click(function() {
+        const bookId = $('#custom-context-menu').data('targetElement');
+        if (bookId) {
+            const book = $(`.book[data-id="${bookId}"]`);
+            if (book.length) {
+                const filePath = book.attr('data-file-path');
+                const link = document.createElement('a');
+                link.href = filePath;
+                link.download = '';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+    });
+    
+    $('#context-share').click(function() {
+        alert('Функция "Поделиться" будет доступна в следующей версии');
+    });
+    
+    $('#context-favorite').click(function() {
+        alert('Книга добавлена в избранное');
+    });
+    
+    $('#context-report').click(function() {
+        alert('Спасибо за сообщение о проблеме! Мы рассмотрим его в ближайшее время.');
+    });
 });
 
-// для загрузки с сервера (доделать)
+// Загрузка книг
 function loadBooks() {
-    fetch('/api/get-books.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                const bookContainers = document.querySelectorAll('.books-container');
-                bookContainers.forEach(container => {
-                    container.innerHTML = '';
-                });
-                
-                // группировка книг
-                const booksBySubject = {};
-                
-                data.books.forEach(book => {
-                    if (!booksBySubject[book.subject]) {
-                        booksBySubject[book.subject] = [];
-                    }
-                    booksBySubject[book.subject].push(book);
-                });
-                
-                // заполнение книгами
-                Object.keys(booksBySubject).forEach(subject => {
-                    const container = document.getElementById(`${subject}-books`);
-                    if (container) {
-                        booksBySubject[subject].forEach(book => {
-                            container.appendChild(createBookElement(book));
-                        });
-                    }
-                });
-                
-                // empty shelf message
-                bookContainers.forEach(container => {
-                    if (container.children.length === 0) {
-                        const emptyShelf = document.createElement('div');
-                        emptyShelf.className = 'empty-shelf';
-                        emptyShelf.innerHTML = '<i class="ri-book-line"></i><p>На этой полке пока нет книг</p>';
-                        container.appendChild(emptyShelf);
-                    }
-                });
-            } else {
-                console.error('Ошибка загрузки книг:', data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Ошибка загрузки книг:', error);
-        });
+    // Используем демонстрационные данные
+    renderBooks(getMockBooks());
 }
 
-// создание экземпляра книги
+// Рендеринг книг
+function renderBooks(data) {
+    const bookContainers = document.querySelectorAll('.books-flex');
+    bookContainers.forEach(container => {
+        container.innerHTML = '';
+    });
+    
+    // Группировка книг по предметам
+    const booksBySubject = {};
+    
+    data.books.forEach(book => {
+        if (!booksBySubject[book.subject]) {
+            booksBySubject[book.subject] = [];
+        }
+        booksBySubject[book.subject].push(book);
+    });
+    
+    // Заполнение полок книгами
+    Object.keys(booksBySubject).forEach(subject => {
+        const container = document.getElementById(`${subject}-books`);
+        if (container) {
+            booksBySubject[subject].forEach(book => {
+                container.appendChild(createBookElement(book));
+            });
+        }
+    });
+    
+    // Добавление сообщения о пустых полках
+    bookContainers.forEach(container => {
+        if (container.children.length === 0) {
+            const emptyShelf = document.createElement('div');
+            emptyShelf.className = 'empty-shelf';
+            emptyShelf.innerHTML = '<i class="ri-book-line"></i><p>На этой полке пока нет книг</p>';
+            container.appendChild(emptyShelf);
+        }
+    });
+}
+
+// Создание элемента книги
 function createBookElement(book) {
     const bookElement = document.createElement('div');
     bookElement.className = 'book';
@@ -202,12 +246,11 @@ function createBookElement(book) {
         <div class="book-cover">
             <img src="${book.cover_path || '/assets/img/default-book-cover.jpg'}" alt="${book.title}">
         </div>
-        <div class="book-spine"></div>
-        <div class="book-pages"></div>
         <div class="book-title">${book.title}</div>
+        <div class="book-author">${book.author}</div>
     `;
     
-    // клик - инфо о книге
+    // Обработка клика по книге
     bookElement.addEventListener('click', function() {
         showBookDetails(this);
     });
@@ -215,7 +258,7 @@ function createBookElement(book) {
     return bookElement;
 }
 
-// Функция для отображения информации о книге
+// Отображение информации о книге
 function showBookDetails(bookElement) {
     const modal = document.getElementById('book-info-modal');
     
@@ -227,58 +270,58 @@ function showBookDetails(bookElement) {
     const bookDescription = bookElement.getAttribute('data-description');
     const bookFilePath = bookElement.getAttribute('data-file-path');
     
-    // обложки
+    // Получение обложки
     const bookCoverImg = bookElement.querySelector('.book-cover img');
     const bookCoverPath = bookCoverImg.src;
     
-    // заполнение модального окна
+    // Заполнение модального окна
     document.getElementById('modal-book-title').textContent = bookTitle;
     document.getElementById('modal-book-author').textContent = bookAuthor;
     document.getElementById('modal-book-year').textContent = bookYear;
     
-    // названия книг
+    // Названия предметов для отображения
     const subjectNames = {
         'geology': 'Геология',
-        'petrology': 'Петрология',
-        'mineralogy': 'Минералогия',
         'geophysics': 'Геофизика',
         'geochemistry': 'Геохимия',
         'hydrogeology': 'Гидрогеология',
-        'paleontology': 'Палеонтология',
-        'oil-gas': 'Нефтегазовое дело',
-        'mining': 'Горное дело',
-        'ecology': 'Экология'
+        'nglaws': 'Горное право',
+        'lythology': 'Литология',
+        'mechanic': 'Механика',
+        'mineralogy': 'Минералогия',
+        'ngprovances': 'Нефтегазоносные провинции',
+        'oilandgas': 'Нефтегазовое дело',
+        'podschetzapasov': 'Подсчет запасов',
+        'other': 'Разные дисциплины'
     };
     
     document.getElementById('modal-book-subject').textContent = subjectNames[bookSubject] || bookSubject;
     document.getElementById('modal-book-description').textContent = bookDescription || 'Описание отсутствует';
     document.getElementById('modal-book-cover').src = bookCoverPath;
     
-    // download link
+    // Настройка кнопки скачивания
     const downloadLink = document.getElementById('modal-download-link');
     downloadLink.href = bookFilePath;
     downloadLink.setAttribute('download', '');
     
-    // чтение онлайн (проверить работу)
+    // Настройка кнопки чтения онлайн
     const readOnlineBtn = document.getElementById('modal-read-online');
     readOnlineBtn.onclick = function() {
-        // check extension
         const fileExt = bookFilePath.split('.').pop().toLowerCase();
         
         if (fileExt === 'pdf') {
-            // pdf _blank
             window.open(`/viewer/pdf-viewer.html?file=${encodeURIComponent(bookFilePath)}`, '_blank');
         } else {
             window.open(bookFilePath, '_blank');
         }
     };
     
-    // модальное окно
+    // Отображение модального окна
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
 }
 
-// Функция для фильтрации книг по поисковому запросу
+// Фильтрация книг по поисковому запросу
 function filterBooks(searchTerm) {
     const books = document.querySelectorAll('.book');
     
@@ -292,19 +335,20 @@ function filterBooks(searchTerm) {
             book.style.display = 'none';
         }
     });
+    
     checkEmptyShelves();
 }
 
-// фильтрация
+// Фильтрация по предмету
 function filterBySubject(subject) {
-    const bookshelfSections = document.querySelectorAll('.bookshelf-section');
+    const flexSections = document.querySelectorAll('.flex-section');
     
     if (subject === 'all') {
-        bookshelfSections.forEach(section => {
+        flexSections.forEach(section => {
             section.style.display = '';
         });
     } else {
-        bookshelfSections.forEach(section => {
+        flexSections.forEach(section => {
             if (section.getAttribute('data-subject') === subject) {
                 section.style.display = '';
             } else {
@@ -314,9 +358,9 @@ function filterBySubject(subject) {
     }
 }
 
-// Функция для проверки пустых полок после фильтрации
+// Проверка пустых полок после фильтрации
 function checkEmptyShelves() {
-    const bookContainers = document.querySelectorAll('.books-container');
+    const bookContainers = document.querySelectorAll('.books-flex');
     
     bookContainers.forEach(container => {
         const visibleBooks = Array.from(container.querySelectorAll('.book')).filter(book => book.style.display !== 'none');
@@ -328,13 +372,11 @@ function checkEmptyShelves() {
             emptyShelf.innerHTML = '<i class="ri-book-line"></i><p>Книги не найдены</p>';
             container.appendChild(emptyShelf);
         } else if (visibleBooks.length > 0 && existingEmptyShelf) {
-
             existingEmptyShelf.remove();
         }
     });
 }
 
-// мок книг
 // Тестовые данные книг
 function getMockBooks() {
     return {
@@ -422,63 +464,4 @@ function getMockBooks() {
             }
         ]
     };
-}
-
-// function loadBooks() {
-//     try {
-//         fetch('/api/get-books.php')
-//             .then(response => response.json())
-//             .then(data => {
-//                 if (data.success) {
-//                     renderBooks(data);
-//                 } else {
-//                     console.error('Ошибка загрузки книг:', data.message);
-//                     renderBooks(getMockBooks());
-//                 }
-//             })
-//             .catch(error => {
-//                 console.warn('API не настроен, используем демонстрационные данные');
-//                 renderBooks(getMockBooks());
-//             });
-//     } catch (error) {
-//         console.warn('API не настроен, используем демонстрационные данные');
-//         renderBooks(getMockBooks());
-//     }
-// }
-
-// рендеринг книг
-function renderBooks(data) {
-
-    const bookContainers = document.querySelectorAll('.books-container');
-    bookContainers.forEach(container => {
-        container.innerHTML = '';
-    });
-    
-    // группировка
-    const booksBySubject = {};
-    
-    data.books.forEach(book => {
-        if (!booksBySubject[book.subject]) {
-            booksBySubject[book.subject] = [];
-        }
-        booksBySubject[book.subject].push(book);
-    });
-
-    Object.keys(booksBySubject).forEach(subject => {
-        const container = document.getElementById(`${subject}-books`);
-        if (container) {
-            booksBySubject[subject].forEach(book => {
-                container.appendChild(createBookElement(book));
-            });
-        }
-    });
-    
-    bookContainers.forEach(container => {
-        if (container.children.length === 0) {
-            const emptyShelf = document.createElement('div');
-            emptyShelf.className = 'empty-shelf';
-            emptyShelf.innerHTML = '<i class="ri-book-line"></i><p>На этой полке пока нет книг</p>';
-            container.appendChild(emptyShelf);
-        }
-    });
 }

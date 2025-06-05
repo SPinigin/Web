@@ -42,7 +42,6 @@
   --gradient-end: #7c3aed;
 }
 
-/* Футуристическая темная тема 2025 */
 body.dark-mode {
   /* Основные цвета */
   --primary-color: #38bdf8; /* Светлый голубой */
@@ -114,7 +113,6 @@ hr {
 }
 
 .sitename {
-  flex: 1;
   align-items: center;
 }
 
@@ -133,9 +131,12 @@ hr {
   text-shadow: 0 0 10px var(--neon-glow);
   transition: var(--transition);
   letter-spacing: 0.5px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: auto;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .sitename a:hover {
@@ -655,10 +656,15 @@ footer {
 }
 
 @media (min-width: 992px) {
+  .horizontal-menu {
+    display: none;
+  }
+  
   .horizontal-menu ul {
     justify-content: center;
     margin: 0 auto;
     max-width: 1200px;
+    display: none;
   }
 }
 
@@ -669,7 +675,6 @@ footer {
     margin-left: auto;
 }
 
-/* Стили для кнопок авторизации */
 .auth-buttons {
     display: flex;
     gap: 10px;
@@ -829,24 +834,22 @@ footer {
     color: #ef4444;
 }
 
-@@media (max-width: 768px) {
+@media (max-width: 768px) {
     .header {
         justify-content: space-between;
         padding: 12px 15px;
     }
 
     .main-menu-button {
-        order: 1; /* Кнопка меню первая слева */
+        order: 1;
     }
 
     .sitename {
-        order: 2; /* Логотип в центре */
         flex: 1;
         text-align: center;
     }
 
     .header-controls {
-        order: 3; /* Контролы справа */
         margin-left: 0;
         gap: 10px;
     }
@@ -910,7 +913,7 @@ footer {
     }
 }
 
-@media (max-width: 1200px) and (min-width: 992px) {
+@media (max-width: 1200px) {
   .horizontal-menu a {
     padding: 8px 12px;
     font-size: 14px;

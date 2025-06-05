@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Библиотека | HackGEO</title>
+    <title>Библиотека (Flex) | HackGEO</title>
     <meta name="description" content="Геологическая библиотека - учебники, пособия и научные работы">
     <link rel="stylesheet" href="assets/css/mainstyle.css">
-    <link rel="stylesheet" href="assets/css/library.css">
+    <link rel="stylesheet" href="assets/css/library-flex.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
     
@@ -34,24 +35,41 @@
         </div>
     </header>
 
-    <nav class="wrap-main-menu">
-        <ul class="main-menu">
+    <nav class="horizontal-menu">
+        <ul class="main-nav">
             <li><a href="/profileform.html"><i class="ri-user-3-fill"></i> Профиль</a></li>
             <li><a href="https://www.tyuiu.ru/"><i class="ri-newspaper-line"></i> Новости</a></li>
-            <li><a href="/library-flex.html"><i class="ri-book-line"></i> Библиотека</a></li>
-            <li><a href="/labs.html"><i class="ri-microscope-fill"></i> Лабораторные работы</a></li>
+            <li class="dropdown-parent">
+                <a href="#"><i class="ri-book-line"></i> Библиотека <i class="ri-arrow-down-s-line"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/library.html">Стандартная версия</a></li>
+                    <li><a href="/library-flex.html">Flex версия</a></li>
+                    <li><a href="#">Новые поступления</a></li>
+                    <li><a href="#">Топ популярных</a></li>
+                </ul>
+            </li>
+            <li class="dropdown-parent">
+                <a href="#"><i class="ri-microscope-fill"></i> Лабораторные <i class="ri-arrow-down-s-line"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/labs.html">Все лабораторные</a></li>
+                    <li><a href="#">Геология</a></li>
+                    <li><a href="#">Геофизика</a></li>
+                    <li><a href="#">Нефтегазовое дело</a></li>
+                </ul>
+            </li>
             <li><a href="/exams.html"><i class="ri-graduation-cap-fill"></i> Экзамены</a></li>
             <li><a href="/feedback.html"><i class="ri-feedback-line"></i> Обратная связь</a></li>
             <li><a href="/contacts.html"><i class="ri-contacts-fill"></i> Контакты</a></li>
         </ul>
     </nav>
-
-    <nav class="horizontal-menu">
-        <ul>
+    
+    <nav class="wrap-main-menu">
+        <ul class="main-menu">
             <li><a href="/profileform.html"><i class="ri-user-3-fill"></i> Профиль</a></li>
             <li><a href="https://www.tyuiu.ru/"><i class="ri-newspaper-line"></i> Новости</a></li>
-            <li><a href="/library-flex.html"><i class="ri-book-line"></i> Библиотека</a></li>
-            <li><a href="/labs.html"><i class="ri-microscope-fill"></i> Лабораторные</a></li>
+            <li><a href="/library.html"><i class="ri-book-line"></i> Библиотека</a></li>
+            <li><a href="/library-flex.html"><i class="ri-book-line"></i> Библиотека (Flex)</a></li>
+            <li><a href="/labs.html"><i class="ri-microscope-fill"></i> Лабораторные работы</a></li>
             <li><a href="/exams.html"><i class="ri-graduation-cap-fill"></i> Экзамены</a></li>
             <li><a href="/feedback.html"><i class="ri-feedback-line"></i> Обратная связь</a></li>
             <li><a href="/contacts.html"><i class="ri-contacts-fill"></i> Контакты</a></li>
@@ -59,7 +77,6 @@
     </nav>
     
     <main class="library-container">
-        
         <header class="library-header">
             <h1>Библиотека <i class="ri-book-2-line"></i></h1>
             <p class="library-description">Коллекция учебников, пособий и научных работ по геологии и смежным дисциплинам</p>
@@ -99,7 +116,6 @@
             </section>
         </header>
         
-        
         <dialog id="upload-modal" class="modal">
             <div class="modal-content">
                 <button class="close" aria-label="Закрыть">&times;</button>
@@ -123,7 +139,16 @@
                             <option value="">Выберите предмет</option>
                             <option value="geology">Геология</option>
                             <option value="geophysics">Геофизика</option>
-                            
+                            <option value="geochemistry">Геохимия</option>
+                            <option value="hydrogeology">Гидрогеология</option>
+                            <option value="nglaws">Горное право</option>
+                            <option value="lythology">Литология</option>
+                            <option value="mechanic">Механика</option>
+                            <option value="mineralogy">Минералогия</option>
+                            <option value="ngprovances">Нефтегазоносные провинции</option>
+                            <option value="oilandgas">Нефтегазовое дело</option>
+                            <option value="podschetzapasov">Подсчет запасов</option>
+                            <option value="other">Разные дисциплины</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -202,132 +227,114 @@
             </div>
         </dialog>
 
-        
-        <section class="library-shelves">
+        <section class="library-flex-container">
             
-            <article class="bookshelf-section" data-subject="geology">
+            <article class="flex-section" data-subject="geology">
                 <h2 class="subject-title">Геология</h2>
-                <div class="bookshelf">
-                    <div class="shelf-background" aria-hidden="true"></div>
-                    <div class="books-container" id="geology-books">
-                        
-                    </div>
+                <div class="books-flex" id="geology-books">
+                    
                 </div>
             </article>
 
             
-            <article class="bookshelf-section" data-subject="geophysics">
+            <article class="flex-section" data-subject="geophysics">
                 <h2 class="subject-title">Геофизика</h2>
-                <div class="bookshelf">
-                    <div class="shelf-background" aria-hidden="true"></div>
-                    <div class="books-container" id="geophysics-books">
-                        
-                    </div>
+                <div class="books-flex" id="geophysics-books">
+                    
                 </div>
             </article>
 
             
-            <article class="bookshelf-section" data-subject="geochemistry">
+            <article class="flex-section" data-subject="geochemistry">
                 <h2 class="subject-title">Геохимия</h2>
-                <div class="bookshelf">
-                    <div class="shelf-background" aria-hidden="true"></div>
-                    <div class="books-container" id="geochemistry-books">
-                        
-                    </div>
+                <div class="books-flex" id="geochemistry-books">
+                    
                 </div>
             </article>
 
-            <article class="bookshelf-section" data-subject="hydrogeology">
+            
+            <article class="flex-section" data-subject="hydrogeology">
                 <h2 class="subject-title">Гидрогеология</h2>
-                <div class="bookshelf">
-                    <div class="shelf-background" aria-hidden="true"></div>
-                    <div class="books-container" id="hydrogeology-books">
-                        
-                    </div>
+                <div class="books-flex" id="hydrogeology-books">
+                    
                 </div>
             </article>
 
-            <article class="bookshelf-section" data-subject="nglaws">
+            
+            <article class="flex-section" data-subject="nglaws">
                 <h2 class="subject-title">Горное право</h2>
-                <div class="bookshelf">
-                    <div class="shelf-background" aria-hidden="true"></div>
-                    <div class="books-container" id="nglaws-books">
-                        
-                    </div>
+                <div class="books-flex" id="nglaws-books">
+                    
                 </div>
             </article>
 
-            <article class="bookshelf-section" data-subject="lythology">
+            
+            <article class="flex-section" data-subject="lythology">
                 <h2 class="subject-title">Литология</h2>
-                <div class="bookshelf">
-                    <div class="shelf-background" aria-hidden="true"></div>
-                    <div class="books-container" id="lythology-books">
-                        
-                    </div>
+                <div class="books-flex" id="lythology-books">
+                    
                 </div>
             </article>
 
-            <article class="bookshelf-section" data-subject="mechanic">
+            
+            <article class="flex-section" data-subject="mechanic">
                 <h2 class="subject-title">Механика</h2>
-                <div class="bookshelf">
-                    <div class="shelf-background" aria-hidden="true"></div>
-                    <div class="books-container" id="mechanic-books">
-                        
-                    </div>
+                <div class="books-flex" id="mechanic-books">
+                    
                 </div>
             </article>
 
-            <article class="bookshelf-section" data-subject="mineralogy">
+            
+            <article class="flex-section" data-subject="mineralogy">
                 <h2 class="subject-title">Минералогия</h2>
-                <div class="bookshelf">
-                    <div class="shelf-background" aria-hidden="true"></div>
-                    <div class="books-container" id="mineralogy-books">
-                        
-                    </div>
+                <div class="books-flex" id="mineralogy-books">
+                    
                 </div>
             </article>
 
-            <article class="bookshelf-section" data-subject="ngprovances">
+            
+            <article class="flex-section" data-subject="ngprovances">
                 <h2 class="subject-title">Нефтегазоносные провинции</h2>
-                <div class="bookshelf">
-                    <div class="shelf-background" aria-hidden="true"></div>
-                    <div class="books-container" id="ngprovances-books">
-                        
-                    </div>
+                <div class="books-flex" id="ngprovances-books">
+                    
                 </div>
             </article>
 
-            <article class="bookshelf-section" data-subject="oilandgas">
+            
+            <article class="flex-section" data-subject="oilandgas">
                 <h2 class="subject-title">Нефтегазовое дело</h2>
-                <div class="bookshelf">
-                    <div class="shelf-background" aria-hidden="true"></div>
-                    <div class="books-container" id="oilandgas-books">
-                        
-                    </div>
+                <div class="books-flex" id="oilandgas-books">
+                    
                 </div>
             </article>
 
-            <article class="bookshelf-section" data-subject="podschetzapasov">
+            
+            <article class="flex-section" data-subject="podschetzapasov">
                 <h2 class="subject-title">Подсчет запасов</h2>
-                <div class="bookshelf">
-                    <div class="shelf-background" aria-hidden="true"></div>
-                    <div class="books-container" id="podschetzapasov-books">
-                        
-                    </div>
+                <div class="books-flex" id="podschetzapasov-books">
+                    
                 </div>
             </article>
 
-            <article class="bookshelf-section" data-subject="other">
+            
+            <article class="flex-section" data-subject="other">
                 <h2 class="subject-title">Разные дисциплины</h2>
-                <div class="bookshelf">
-                    <div class="shelf-background" aria-hidden="true"></div>
-                    <div class="books-container" id="other-books">
-                        
-                    </div>
+                <div class="books-flex" id="other-books">
+                    
                 </div>
             </article>
         </section>
     </main>
+
+    <div id="custom-context-menu">
+        <ul>
+            <li id="context-view"><i class="ri-eye-line"></i> Просмотреть</li>
+            <li id="context-download"><i class="ri-download-cloud-line"></i> Скачать</li>
+            <li id="context-share"><i class="ri-share-line"></i> Поделиться</li>
+            <li id="context-favorite"><i class="ri-heart-line"></i> В избранное</li>
+            <li id="context-report"><i class="ri-flag-line"></i> Сообщить о проблеме</li>
+        </ul>
+    </div>
 
     <footer>
         <div class="footer-content">
@@ -338,8 +345,7 @@
 
     <div class="backgroundmenu" aria-hidden="true"></div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="/assets/js/mainscript.js"></script>
-    <script src="/assets/js/library.js"></script>
+    <script src="/assets/js/library-flex.js"></script>
 </body>
 </html>
