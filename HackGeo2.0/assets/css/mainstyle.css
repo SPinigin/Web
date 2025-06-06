@@ -288,8 +288,12 @@ input:checked + .theme-toggle-slider .dark-icon { opacity: 1; }
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-  overflow-x: auto; white-space: nowrap;
-  -ms-overflow-style: none; scrollbar-width: none;
+  overflow-x: auto; 
+  white-space: nowrap;
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
+  position: sticky;
+  z-index: 99;
 }
 
 .horizontal-menu::-webkit-scrollbar { display: none; }

@@ -133,7 +133,6 @@
   pointer-events: none;
 }
 
-/* Flexbox стили для книжных полок */
 .library-flex-container {
   display: flex;
   flex-direction: column;
@@ -176,7 +175,6 @@
   padding: 15px 0;
 }
 
-/* Стили для книг */
 .book {
   width: 140px;
   display: flex;
@@ -234,7 +232,6 @@
   white-space: nowrap;
 }
 
-/* Модальные окна */
 .modal {
   display: none;
   position: fixed;
@@ -561,10 +558,8 @@
   background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
   padding: 12px 0;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  overflow-x: auto; white-space: nowrap;
-  -ms-overflow-style: none; scrollbar-width: none;
+  z-index: 3000;
+  position: relative;
 }
 
 .main-nav {
@@ -573,10 +568,12 @@
   list-style: none;
   margin: 0;
   padding: 12px 0;
+  z-index: 3000;
   position: relative;
 }
 
 .dropdown-parent {
+  z-index: 3000;
   position: relative;
 }
 
@@ -593,7 +590,7 @@
   border: 1px solid var(--glass-border);
   padding: 8px 0;
   min-width: 220px;
-  z-index: 510;
+  z-index: 3100;
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.3s, transform 0.3s;

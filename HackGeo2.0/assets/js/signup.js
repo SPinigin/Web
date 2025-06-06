@@ -56,6 +56,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // отключить контекстное меню
+    $(document).on('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+    });
 });
 
 // поля в зависимости от пользователя
