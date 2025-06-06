@@ -6,180 +6,220 @@
     <title>HackGEO</title>
     <meta name="description" content="HackGeo - портал о геологии">
     <meta name="keywords" content="HackGeo, геолог, студент, студент-геолог, геология, ТИУ, нефтегаз, нефтегазовая библиотека">
-    <link rel="stylesheet" href="assets/css/mainstyle.css">
+    
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    
+    
+    <link rel="stylesheet" href="assets/css/mainstyle.css">
+    
+   
 </head>
 <body>
-    <header class="header">
-        <div class="main-menu-button" id="main-menu-button"><i class="ri-menu-fold-2-fill"></i></div>
-        <div class="sitename">
-            <a href="index.html">
+    
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
                 <span class="logo-hack">Hack</span><span class="logo-geo">GEO</span>
                 <span class="logo-icon">🌍</span>
             </a>
-        </div>
-        <div class="header-controls">
-            <div class="auth-buttons" id="auth-buttons">
-                <a href="signin.html" class="auth-btn signin-btn">
-                    <i class="ri-login-circle-line"></i>
-                    <span>Войти</span>
-                </a>
-                <a href="signup.html" class="auth-btn signup-btn">
-                    <i class="ri-user-add-line"></i>
-                    <span>Регистрация</span>
-                </a>
-            </div>
-            <div class="user-profile" id="user-profile" style="display: none;">
-                <button class="profile-btn" id="profile-btn">
-                    <div class="profile-avatar">
-                        <i class="ri-user-3-line"></i>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.tyuiu.ru/"><i class="ri-newspaper-line"></i> Новости</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/library-flex.html"><i class="ri-book-line"></i> Библиотека</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/labs.html"><i class="ri-microscope-fill"></i> Лабораторные</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/exams.html"><i class="ri-graduation-cap-fill"></i> Экзамены</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/feedback.html"><i class="ri-feedback-line"></i> Обратная связь</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contacts.html"><i class="ri-contacts-fill"></i> Контакты</a>
+                    </li>
+                </ul>
+                
+                <div class="d-flex align-items-center">
+                    
+                    <div class="auth-buttons" id="auth-buttons">
+                        <a href="signin.html" class="btn btn-outline-light btn-sm me-2">
+                            <i class="ri-login-circle-line"></i>
+                            <span class="d-none d-md-inline">Войти</span>
+                        </a>
+                        <a href="signup.html" class="btn btn-info btn-sm">
+                            <i class="ri-user-add-line"></i>
+                            <span class="d-none d-md-inline">Регистрация</span>
+                        </a>
                     </div>
-                    <span class="profile-name">Имя пользователя</span>
-                    <i class="ri-arrow-down-s-line"></i>
-                </button>
-                <div class="profile-dropdown" id="profile-dropdown">
-                    <a href="/profile.html" class="dropdown-item">
-                        <i class="ri-user-settings-line"></i>
-                        <span>Мой профиль</span>
-                    </a>
-                    <a href="/settings.html" class="dropdown-item">
-                        <i class="ri-settings-3-line"></i>
-                        <span>Настройки</span>
-                    </a>
-                    <hr class="dropdown-divider">
-                    <button class="dropdown-item logout-btn" id="logout-btn">
-                        <i class="ri-logout-circle-r-line"></i>
-                        <span>Выйти</span>
-                    </button>
+                    
+                    
+                    <div class="dropdown" id="user-profile" style="display: none;">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" id="profile-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="ri-user-3-line"></i>
+                            <span class="profile-name d-none d-md-inline">Имя пользователя</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile-btn">
+                            <li><a class="dropdown-item" href="/profile.html"><i class="ri-user-settings-line"></i> Мой профиль</a></li>
+                            <li><a class="dropdown-item" href="/settings.html"><i class="ri-settings-3-line"></i> Настройки</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><button class="dropdown-item text-danger" id="logout-btn"><i class="ri-logout-circle-r-line"></i> Выйти</button></li>
+                        </ul>
+                    </div>
+                    
+                    
+                    <!-- <div class="theme-toggle-container">
+                        <label class="theme-toggle-label d-none d-md-block">Тема</label>
+                        <div class="form-check form-switch ms-2">
+                            <input class="form-check-input" type="checkbox" id="theme-toggle-checkbox">
+                            <label class="form-check-label" for="theme-toggle-checkbox">
+                                <i class="ri-sun-line d-none"></i>
+                                <i class="ri-moon-line d-none"></i>
+                            </label>
+                        </div>
+                    </div> -->
                 </div>
             </div>
         </div>
-        <div class="theme-toggle-container">
-            <label class="theme-toggle-label">Тема</label>
-            <label class="theme-toggle">
-                <input type="checkbox" id="theme-toggle-checkbox">
-                <span class="theme-toggle-slider">
-                    <i class="ri-sun-line light-icon"></i>
-                    <i class="ri-moon-line dark-icon"></i>
-                </span>
-            </label>
-        </div>
-    </header>
-
-    <nav class="horizontal-menu">
-        <ul>
-            <li><a href="https://www.tyuiu.ru/"><i class="ri-newspaper-line"></i> Новости</a></li>
-            <li><a href="/library-flex.html"><i class="ri-book-line"></i> Библиотека</a></li>
-            <li><a href="/labs.html"><i class="ri-microscope-fill"></i> Лабораторные</a></li>
-            <li><a href="/exams.html"><i class="ri-graduation-cap-fill"></i> Экзамены</a></li>
-            <li><a href="/feedback.html"><i class="ri-feedback-line"></i> Обратная связь</a></li>
-            <li><a href="/contacts.html"><i class="ri-contacts-fill"></i> Контакты</a></li>
-        </ul>
     </nav>
 
-    
-    <nav class="wrap-main-menu">
-        <ul class="main-menu">
-            <li><a href="https://www.tyuiu.ru/"><i class="ri-newspaper-line"></i> Новости</a></li>
-            <li><a href="/library-flex.html"><i class="ri-book-line"></i> Библиотека</a></li>
-            <li><a href="/labs.html"><i class="ri-microscope-fill"></i> Лабораторные работы</a></li>
-            <li><a href="/exams.html"><i class="ri-graduation-cap-fill"></i> Экзамены</a></li>
-            <li><a href="/feedback.html"><i class="ri-feedback-line"></i> Обратная связь</a></li>
-            <li><a href="/contacts.html"><i class="ri-contacts-fill"></i> Контакты</a></li>
-        </ul>
-    </nav>
-
-    <main>
-        <section class="news">
-            <header class="section-header">
-                <h1>Новости ТИУ</h1>
-            </header>
-            <article class="news-item">
-                <h2>Тюменский индустриальный университет в премьер-лиге</h2>
-                <p>Тюменский индустриальный университет удержал позиции и вновь вошел в премьер-лигу 
-                <a href="https://best-edu.ru/ratings/national/nacionalnyj-agregirovannyj-rejting">Национального 
-                агрегированного рейтинга – 2025.</a></p>
-                <p>Оценивались 685 вузов, 40 из них оказались в топе лучших, среди них ТИУ.
-                В рейтинге собрана информация обо всех высших учебных заведениях России...</p>
-            </article>
-            <article class="news-item">
-                <h2>Приёмная кампания ТИУ стартует 20 июня 2025 года</h2>
-                <p>Адреса пунктов приёма документов:</p>
-                <ul>
-                    <li>г.Тюмень, ул. Республики, 47</li>
-                    <li>г.Тюмень, ул. Энергетиков, 44/1</li>
-                    <li>г. Тобольск, Зона вузов №5 корпус 1</li>
-                    <li>г. Сургут, ул. Энтузиастов, 38</li>
-                    <li>г. Нижневартовск, ул. Ленина, 2/п, строение 9</li>
-                    <li>г. Ноябрьск, ул. Северная, д. 46</li>
-                </ul>
-            </article>
-            <article class="news-item">
-                <h2>Найти место для парковки поможет нейросеть</h2>
-                <time datetime="2024-03-12">12.03.2025</time>
-                <p>Студенты Тюменского индустриального университета разрабатывают систему автоматизированного мониторинга 
-                парковочного пространства...</p>
-                <figure>
-                    <img src="/assets/img/parkingproject.jpeg" alt="Схема приложения поиска парковки">
-                </figure>
-            </article>
+    <main class="container py-4">
+        
+        <section class="news mb-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="h3 mb-0">Новости ТИУ</h1>
+                </div>
+                <div class="card-body">
+                    <article class="news-item mb-4">
+                        <h2 class="h4">Тюменский индустриальный университет в премьер-лиге</h2>
+                        <p>Тюменский индустриальный университет удержал позиции и вновь вошел в премьер-лигу 
+                        <a href="https://best-edu.ru/ratings/national/nacionalnyj-agregirovannyj-rejting">Национального 
+                        агрегированного рейтинга – 2025.</a></p>
+                        <p>Оценивались 685 вузов, 40 из них оказались в топе лучших, среди них ТИУ.
+                        В рейтинге собрана информация обо всех высших учебных заведениях России...</p>
+                    </article>
+                    
+                    <article class="news-item mb-4">
+                        <h2 class="h4">Приёмная кампания ТИУ стартует 20 июня 2025 года</h2>
+                        <p>Адреса пунктов приёма документов:</p>
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item">г.Тюмень, ул. Республики, 47</li>
+                            <li class="list-group-item">г.Тюмень, ул. Энергетиков, 44/1</li>
+                            <li class="list-group-item">г. Тобольск, Зона вузов №5 корпус 1</li>
+                            <li class="list-group-item">г. Сургут, ул. Энтузиастов, 38</li>
+                            <li class="list-group-item">г. Нижневартовск, ул. Ленина, 2/п, строение 9</li>
+                            <li class="list-group-item">г. Ноябрьск, ул. Северная, д. 46</li>
+                        </ul>
+                    </article>
+                    
+                    <article class="news-item">
+                        <h2 class="h4">Найти место для парковки поможет нейросеть</h2>
+                        <p class="text-muted"><small>12.03.2025</small></p>
+                        <p>Студенты Тюменского индустриального университета разрабатывают систему автоматизированного мониторинга 
+                        парковочного пространства...</p>
+                        <figure class="text-center">
+                            <img src="/assets/img/parkingproject.jpeg" alt="Схема приложения поиска парковки" class="img-fluid rounded shadow-sm">
+                        </figure>
+                    </article>
+                </div>
+            </div>
         </section>
 
-        <section class="publications">
-            <h2>Список опубликованных научных статей</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Название</th>
-                        <th>Автор</th>
-                        <th>Год публикации</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Комплексный подход к применению методов анализа эффективности системы заводнения нефтяных пластов</td>
-                        <td>Пинигин С.Н.</td>
-                        <td>2024</td>
-                    </tr>
-                    <tr>
-                        <td>Методика количественного анализа эффективности систем заводнения</td>
-                        <td>Пинигин С.Н.</td>
-                        <td>2024</td>
-                    </tr>
-                </tbody>
-            </table>
+        
+        <section class="publications mb-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h3 mb-0">Список опубликованных научных статей</h2>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th>Название</th>
+                                    <th>Автор</th>
+                                    <th>Год публикации</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Комплексный подход к применению методов анализа эффективности системы заводнения нефтяных пластов</td>
+                                    <td>Пинигин С.Н.</td>
+                                    <td>2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Методика количественного анализа эффективности систем заводнения</td>
+                                    <td>Пинигин С.Н.</td>
+                                    <td>2024</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section class="video">
-            <h2 class="visually-hidden">Видеоматериалы</h2>
-            <iframe width="560" height="315" 
-                    src="https://www.youtube.com/embed/p5S4MzPpjHs?si=-ggZppg4Bd7OsIAK" 
-                    title="YouTube video player" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-            </iframe>
-            <iframe width="560" height="315" 
-                    src="https://www.youtube.com/embed/VYk1SRZkZHQ?si=MUVmBF9tMt5JnIUJ" 
-                    title="YouTube video player" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-            </iframe>
+        
+        <section class="video mb-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h3 mb-0">Видеоматериалы</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3 mb-md-0">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/p5S4MzPpjHs?si=-ggZppg4Bd7OsIAK" 
+                                        title="YouTube video player" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/VYk1SRZkZHQ?si=MUVmBF9tMt5JnIUJ" 
+                                        title="YouTube video player" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <p>Разработка и дизайн: Пинигин Сергей</p>
-            <p>e-mail: <a href="mailto:pinigin09@yandex.ru">pinigin09@yandex.ru</a></p>
+    
+    <footer class="footer">
+        <div class="container">
+            <p class="mb-1">Разработка и дизайн: Пинигин Сергей</p>
+            <p class="mb-0">e-mail: <a href="mailto:pinigin09@yandex.ru">pinigin09@yandex.ru</a></p>
         </div>
     </footer>
 
-    <div class="backgroundmenu"></div>
+    
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/js/mainscript.js"></script>
+    <script src="mainscript.js"></script>
 </body>
 </html>

@@ -117,3 +117,47 @@ function setupLogout() {
 
 // Отслеживаем изменение размера окна
 window.addEventListener('resize', checkScreenSize);
+
+// // Переключение темы
+// document.addEventListener('DOMContentLoaded', function() {
+//     const themeToggle = document.getElementById('theme-toggle-checkbox');
+    
+//     // Проверка сохраненной темы
+//     if (localStorage.getItem('theme') === 'dark') {
+//         document.body.classList.add('dark-mode');
+//         themeToggle.checked = true;
+//     }
+    
+//     // Обработчик переключения темы
+//     themeToggle.addEventListener('change', function() {
+//         document.body.classList.toggle('dark-mode');
+        
+//         if (document.body.classList.contains('dark-mode')) {
+//             localStorage.setItem('theme', 'dark');
+//         } else {
+//             localStorage.setItem('theme', 'light');
+//         }
+//     });
+    
+//     // Имитация авторизации (для демонстрации)
+//     const authButtons = document.getElementById('auth-buttons');
+//     const userProfile = document.getElementById('user-profile');
+    
+//     // Проверка авторизации
+//     if (localStorage.getItem('isAuthenticated') === 'true') {
+//         authButtons.style.display = 'none';
+//         userProfile.style.display = 'block';
+//         const userName = localStorage.getItem('userName') || 'Пользователь';
+//         document.querySelector('.profile-name').textContent = userName;
+//     }
+    
+//     // Обработчик выхода
+//     const logoutBtn = document.getElementById('logout-btn');
+//     if (logoutBtn) {
+//         logoutBtn.addEventListener('click', () => {
+//             localStorage.removeItem('isAuthenticated');
+//             localStorage.removeItem('userName');
+//             window.location.href = '/signin.html';
+//         });
+//     }
+// });
