@@ -3,97 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Как добраться - Коттедж для отдыха</title>
-    
+    <title>Как добраться</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    
-    
     <link rel="stylesheet" href="css/style.css">
-    
-    <style>
-        .map-section {
-            padding: 50px 0;
-        }
+    <link rel="stylesheet" href="css/map.css">
         
-        .map-container {
-            height: 500px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-        }
-        
-        .directions-card {
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            padding: 25px;
-            height: 100%;
-        }
-        
-        .direction-item {
-            padding: 15px 0;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .direction-item:last-child {
-            border-bottom: none;
-        }
-        
-        .direction-item i {
-            color: var(--primary-color);
-            margin-right: 10px;
-        }
-        
-        .contact-info {
-            background: var(--light-color);
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 20px;
-        }
-        
-        .contact-info i {
-            color: var(--primary-color);
-            margin-right: 10px;
-        }
-    </style>
 </head>
 <body>
     
     <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <i class="fas fa-home me-2"></i>Коттедж для отдыха
-            </a>
+    <div class="container">
+        <div class="navbar-wrapper w-100 d-flex justify-content-between align-items-center">
+            
+            <div class="d-lg-none navbar-brand-container">
+            </div>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Главная</a>
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home me-2"></i>Главная
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="map.html">Как добраться</a>
+                        <a class="nav-link" href="gallery.html">
+                            <i class="fas fa-images me-1"></i>Галерея
+                        </a>
+                    </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="prices.html">
+                            <i class="fas fa-tag me-1"></i>Цены
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="booking.html">Бронирование</a>
+                        <a class="nav-link" href="booking.html">
+                            <i class="fas fa-calendar-alt me-1"></i>Бронирование
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contacts.html">Контакты</a>
+                        <a class="nav-link" href="map.html">
+                            <i class="fas fa-map-marker-alt me-1"></i>Карта
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="rules.html">
+                            <i class="fas fa-list-ul me-1"></i>Правила
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacts.html">
+                            <i class="fas fa-envelope me-1"></i>Контакты
+                        </a>
                     </li>
                 </ul>
             </div>
         </div>
+    </div>
     </nav>
 
-    
     <section class="page-header">
         <div class="container">
             <h1 class="text-center mb-3">Как добраться</h1>
@@ -101,7 +75,6 @@
         </div>
     </section>
 
-    
     <section class="map-section">
         <div class="container">
             <div class="row g-4">
@@ -112,22 +85,11 @@
                         <script src="https://maps.api.2gis.ru/2.0/loader.js"></script>
                         <div id="map" style="width: 100%; height: 100%;"></div>
                         <script>
-                            DG.then(function () {
-                                // Координаты коттеджа (нужно уточнить точные координаты)
-                                var map = DG.map('map', {
-                                    center: [57.165380, 65.484710], // Примерные координаты
-                                    zoom: 16
-                                });
-
-                                // Добавляем маркер
-                                DG.marker([57.165380, 65.484710]).addTo(map)
-                                    .bindPopup('Коттедж для отдыха<br>с. Перевалово, Боровская 15');
-                            });
+                            
                         </script>
                     </div>
                 </div>
 
-                
                 <div class="col-lg-4">
                     <div class="directions-card">
                         <h3 class="h4 mb-4">Как добраться</h3>
@@ -153,7 +115,6 @@
                             <p>Время в пути от центра Тюмени около 30 минут.</p>
                         </div>
 
-                        
                         <div class="contact-info">
                             <h4 class="h5 mb-3">Контакты</h4>
                             <p class="mb-2">
@@ -170,7 +131,6 @@
                             </p>
                         </div>
 
-                        
                         <div class="text-center mt-4">
                             <a href="https://2gis.ru/tyumen/directions/points/%7C65.48471%2C57.16538" 
                                class="btn btn-primary" 
@@ -184,7 +144,6 @@
         </div>
     </section>
 
-    
     <footer class="py-4">
         <div class="container">
             <div class="row">
@@ -199,10 +158,10 @@
             </div>
         </div>
     </footer>
-
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/map.js"></script>
 </body>
 </html>

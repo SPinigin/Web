@@ -1,0 +1,45 @@
+.map-section {
+            padding: 50px 0;
+        }
+        
+        .map-container {
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        
+        .directions-card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            padding: 25px;
+            height: 100%;
+        }
+        
+        .direction-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .direction-item:last-child {
+            border-bottom: none;
+        }
+        
+        .direction-item i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+        
+        .contact-info {
+            background: var(--light-color);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .contact-info i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+        
