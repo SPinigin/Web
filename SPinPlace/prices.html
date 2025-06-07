@@ -3,126 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Цены на проживание - Коттедж для отдыха</title>
-    
+    <title>Цены на проживание</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    
-    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    
     <link rel="stylesheet" href="css/style.css">
-    
-    <style>
-        /* Дополнительные стили для страницы с ценами */
-        .price-card {
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            height: 100%;
-        }
-        
-        .price-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-        
-        .price-header {
-            background: var(--primary-color);
-            color: white;
-            padding: 20px;
-            border-radius: 15px 15px 0 0;
-            text-align: center;
-        }
-        
-        .price-amount {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin: 20px 0;
-        }
-        
-        .price-features {
-            padding: 0;
-            list-style: none;
-            margin: 0;
-        }
-        
-        .price-features li {
-            padding: 12px 20px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .price-features li i {
-            margin-right: 10px;
-            color: var(--primary-color);
-        }
-        
-        .discount-badge {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: #dc3545;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        
-        .season-info {
-            background: var(--light-color);
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-        
-        .additional-services {
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            margin-top: 30px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/prices.css">
 </head>
+
 <body>
     
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <i class="fas fa-home me-2"></i>Коттедж для отдыха
-            </a>
+   <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <div class="navbar-wrapper w-100 d-flex justify-content-between align-items-center">
+            
+            <div class="d-lg-none navbar-brand-container">
+            </div>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Главная</a>
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home me-2"></i>Главная
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="prices.html">Цены</a>
+                        <a class="nav-link" href="gallery.html">
+                            <i class="fas fa-images me-1"></i>Галерея
+                        </a>
+                    </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="prices.html">
+                            <i class="fas fa-tag me-1"></i>Цены
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="booking.html">Бронирование</a>
+                        <a class="nav-link" href="booking.html">
+                            <i class="fas fa-calendar-alt me-1"></i>Бронирование
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contacts.html">Контакты</a>
+                        <a class="nav-link" href="map.html">
+                            <i class="fas fa-map-marker-alt me-1"></i>Карта
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="rules.html">
+                            <i class="fas fa-list-ul me-1"></i>Правила
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacts.html">
+                            <i class="fas fa-envelope me-1"></i>Контакты
+                        </a>
                     </li>
                 </ul>
             </div>
         </div>
+    </div>
     </nav>
 
-    
     <section class="page-header">
         <div class="container">
             <h1 class="text-center mb-3">Цены на проживание</h1>
@@ -130,7 +76,6 @@
         </div>
     </section>
 
-    
     <section class="prices-section py-5">
         <div class="container">
             
@@ -139,7 +84,6 @@
                 <p class="lead mb-0">Цены варьируются в зависимости от сезона и дней недели</p>
             </div>
 
-            
             <div class="row g-4">
                 
                 <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
@@ -163,7 +107,6 @@
                     </div>
                 </div>
 
-                
                 <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
                     <div class="price-card position-relative">
                         <div class="price-header">
@@ -186,7 +129,6 @@
                 </div>
             </div>
 
-            
             <div class="discounts mt-5" data-aos="fade-up">
                 <h3 class="text-center mb-4">Специальные предложения</h3>
                 <div class="row g-4">
@@ -220,7 +162,6 @@
                 </div>
             </div>
 
-            
             <div class="additional-services mt-5" data-aos="fade-up">
                 <h3 class="text-center mb-4">Дополнительные услуги</h3>
                 <div class="row g-4">
@@ -251,7 +192,6 @@
                 </div>
             </div>
 
-            
             <div class="booking-rules mt-5" data-aos="fade-up">
                 <h3 class="text-center mb-4">Правила бронирования</h3>
                 <div class="row">
@@ -282,7 +222,6 @@
                 </div>
             </div>
 
-            
             <div class="text-center mt-5" data-aos="fade-up">
                 <h3 class="mb-4">Готовы забронировать?</h3>
                 <a href="booking.html" class="btn btn-primary btn-lg">
@@ -292,7 +231,6 @@
         </div>
     </section>
 
-    
     <footer class="py-4">
         <div class="container">
             <div class="row">
@@ -308,7 +246,6 @@
         </div>
     </footer>
 
-    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
