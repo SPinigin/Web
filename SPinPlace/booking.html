@@ -3,59 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бронирование коттеджа</title>
-    
+    <title>Бронирование</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
-    
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    
-    
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/booking.css">
 </head>
 <body>
     
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="index.html">
-                <i class="fas fa-home me-3" style="font-size: 30px;"></i>
-                Коттедж для отдыха
-            </a>
+ <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <div class="navbar-wrapper w-100 d-flex justify-content-between align-items-center">
+            
+            <div class="d-lg-none navbar-brand-container">
+            </div>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center active" href="booking.html">
-                            <i class="fas fa-calendar-alt"></i>
-                            Бронирование
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home me-2"></i>Главная
                         </a>
                     </li>
-                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">
+                            <i class="fas fa-images me-1"></i>Галерея
+                        </a>
+                    </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="prices.html">
+                            <i class="fas fa-tag me-1"></i>Цены
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="booking.html">
+                            <i class="fas fa-calendar-alt me-1"></i>Бронирование
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="map.html">
+                            <i class="fas fa-map-marker-alt me-1"></i>Карта
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="rules.html">
+                            <i class="fas fa-list-ul me-1"></i>Правила
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacts.html">
+                            <i class="fas fa-envelope me-1"></i>Контакты
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
+    </div>
     </nav>
 
-    
     <section class="page-header">
         <div class="container">
-            <h1 class="text-center mb-3">Бронирование коттеджа</h1>
+            <h1 class="text-center mb-3">Бронирование</h1>
             <p class="text-center text-muted">Выберите даты проживания и заполните форму для бронирования</p>
         </div>
     </section>
 
-    
     <section class="booking-section py-5">
         <div class="container">
             <div class="row">
@@ -65,12 +85,10 @@
                         <div class="card-body">
                             <h3 class="card-title mb-4">Выберите даты</h3>
                             
-                            
                             <div class="calendar-wrapper mb-4">
                                 <div id="booking-calendar"></div>
                             </div>
 
-                            
                             <div class="selected-dates p-3 bg-light rounded">
                                 <div class="d-flex justify-content-between mb-2">
                                     <span>Заезд:</span>
@@ -90,7 +108,6 @@
                                 </div>
                             </div>
 
-                            
                             <div class="booking-features mt-4">
                                 <div class="feature-item d-flex align-items-center mb-3">
                                     <i class="fas fa-check-circle text-success me-3"></i>
@@ -109,7 +126,6 @@
                     </div>
                 </div>
 
-                
                 <div class="col-lg-7">
                     <div class="booking-form card shadow-sm">
                         <div class="card-body">
@@ -122,7 +138,6 @@
                                 <input type="hidden" id="nights" name="nights" value="0">
                                 <input type="hidden" id="price" name="price" value="0">
 
-                                
                                 <div class="mb-4">
                                     <label for="guests" class="form-label">Количество гостей <span class="text-danger">*</span></label>
                                     <select id="guests" name="guests" class="form-select" required>
@@ -136,7 +151,6 @@
                                     </select>
                                 </div>
 
-                                
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <label for="lastname" class="form-label">Фамилия <span class="text-danger">*</span></label>
@@ -148,7 +162,6 @@
                                     </div>
                                 </div>
 
-                                
                                 <div class="mb-4">
                                     <label for="phone" class="form-label">Телефон <span class="text-danger">*</span></label>
                                     <div class="input-group">
@@ -165,13 +178,11 @@
                                     </div>
                                 </div>
 
-                                
                                 <div class="mb-4">
                                     <label for="comments" class="form-label">Дополнительные пожелания</label>
                                     <textarea id="comments" name="comments" class="form-control" rows="4"></textarea>
                                 </div>
 
-                                
                                 <div class="mb-4">
                                     <div class="form-check">
                                         <input type="checkbox" id="agree" name="agree" class="form-check-input" required>
@@ -182,7 +193,6 @@
                                     </div>
                                 </div>
 
-                                
                                 <button type="submit" class="btn btn-primary w-100">
                                     <i class="fas fa-calendar-check me-2"></i>Забронировать
                                 </button>
@@ -198,7 +208,6 @@
         </div>
     </section>
 
-    
     <section class="booking-help bg-light py-5">
         <div class="container">
             <div class="text-center">
@@ -213,7 +222,6 @@
         </div>
     </section>
 
-    
     <footer class="py-4">
         <div class="container">
             <div class="row">
@@ -229,7 +237,6 @@
         </div>
     </footer>
 
-    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
