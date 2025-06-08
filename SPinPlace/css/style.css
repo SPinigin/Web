@@ -31,7 +31,7 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-brand {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    color: var(--primary-color) !important;
+    color: var(--primary-color);
     font-size: 28px;
 }
 
@@ -41,20 +41,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-link {
-    color: var(--text-dark) !important;
+    color: var(--text-dark);
     font-weight: 500;
     font-size: 18px;
-    padding: 0.7rem 1.2rem !important;
+    padding: 0.7rem 1.2rem;
     transition: color 0.3s ease;
     white-space: nowrap;
 }
 
 .nav-link:hover {
-    color: var(--primary-color) !important;
+    color: var(--primary-color);
 }
 
 .nav-link.active {
-    color: var(--primary-color) !important;
+    color: var(--primary-color);
     font-weight: 600;
 }
 
@@ -99,7 +99,7 @@ h1, h2, h3, h4, h5, h6 {
 
     .nav-link {
         text-align: center;
-        padding: 10px !important;
+        padding: 10px;
     }
 
     .navbar-toggler {
@@ -199,6 +199,11 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
 }
 
+.price-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
 .price-amount {
     font-size: 2.5rem;
     color: var(--primary-color);
@@ -296,10 +301,10 @@ footer a:hover {
     bottom: 20px;
     right: 20px;
     z-index: 99;
-    width: 70px;
-    height: 50px;
+    width: 90px;
+    height: 60px;
     border-radius: 50px;
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     color: var(--text-light);
     border: none;
     cursor: pointer;
@@ -344,7 +349,7 @@ footer a:hover {
 
     .nav-link {
         text-align: center;
-        padding: 10px !important;
+        padding: 10px;
     }
 
     .navbar-brand {
@@ -380,7 +385,7 @@ footer a:hover {
 /* Дополнительные стили для центрирования на десктопе */
 @media (min-width: 992px) {
     .navbar-collapse {
-        display: flex !important;
+        display: flex;
         flex-grow: 0;
     }
 
