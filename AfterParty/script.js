@@ -1,8 +1,6 @@
-// Дата и время мероприятия
 const eventDate = new Date('2026-02-15T15:00:00');
 const eventLocation = 'Бар «Инкогнито», Орджоникидзе, 63а';
 
-// Функция обновления счетчика
 function updateCountdown() {
     const now = new Date().getTime();
     const distance = eventDate.getTime() - now;
@@ -23,29 +21,23 @@ function updateCountdown() {
     document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
 }
 
-// Обновляем счетчик каждую минуту
 updateCountdown();
 setInterval(updateCountdown, 60000);
 
-// Определение устройства и добавление в календарь
 function detectDevice() {
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
     
-    // Android
     if (/android/i.test(userAgent)) {
         return 'android';
     }
     
-    // iOS
     if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
         return 'ios';
     }
     
-    // Desktop (Google Calendar)
     return 'desktop';
 }
 
-// Форматирование даты для календаря
 function formatDateForCalendar(date) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -55,10 +47,9 @@ function formatDateForCalendar(date) {
     return `${year}${month}${day}T${hours}${minutes}00`;
 }
 
-// Создание ICS файла для календаря
 function createICSFile() {
     const startDate = formatDateForCalendar(eventDate);
-    const endDate = formatDateForCalendar(new Date(eventDate.getTime() + 3 * 60 * 60 * 1000)); // +3 часа
+    const endDate = formatDateForCalendar(new Date(eventDate.getTime() + 3 * 60 * 60 * 1000));
     
     const title = 'Wedding AfterParty';
     const location = eventLocation;
@@ -85,32 +76,27 @@ function createICSFile() {
     return icsContent;
 }
 
-// Создание ссылки для добавления в календарь
 function createCalendarLink() {
     const device = detectDevice();
     const startDate = formatDateForCalendar(eventDate);
-    const endDate = formatDateForCalendar(new Date(eventDate.getTime() + 3 * 60 * 60 * 1000)); // +3 часа
+    const endDate = formatDateForCalendar(new Date(eventDate.getTime() + 3 * 60 * 60 * 1000));
     
     const title = encodeURIComponent('Wedding AfterParty');
     const location = encodeURIComponent(eventLocation);
     const description = encodeURIComponent('Приглашение на свадебную вечеринку');
     
     if (device === 'android' || device === 'desktop') {
-        // Google Calendar для Android и Desktop
         return `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${description}&location=${location}`;
     }
     
-    // Для iOS возвращаем null, будем использовать ICS файл
     return null;
 }
 
-// Обработчик кнопки "Добавить в календарь"
 document.getElementById('addToCalendar').addEventListener('click', function() {
     const device = detectDevice();
     const link = createCalendarLink();
     
     if (device === 'ios') {
-        // Для iOS создаем и скачиваем .ics файл
         const icsContent = createICSFile();
         const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
         const url = URL.createObjectURL(blob);
@@ -122,15 +108,12 @@ document.getElementById('addToCalendar').addEventListener('click', function() {
         a.click();
         document.body.removeChild(a);
         
-        // Очищаем URL через некоторое время
         setTimeout(() => URL.revokeObjectURL(url), 100);
     } else {
-        // Для Android и Desktop открываем Google Calendar
         window.open(link, '_blank');
     }
 });
 
-// Анимация рукописного текста
 function animateSignature() {
     const text = 'С любовью, семья Сатаевых';
     const signatureElement = document.getElementById('signatureText');
@@ -143,23 +126,19 @@ function animateSignature() {
         if (index < text.length) {
             signatureElement.textContent += text.charAt(index);
             index++;
-            // Разная скорость для разных символов (имитация рукописного письма)
             const delay = text.charAt(index - 1) === ' ' ? 150 : Math.random() * 50 + 80;
             setTimeout(typeChar, delay);
         } else {
-            // Убираем курсор после завершения
             setTimeout(() => {
                 signatureElement.classList.add('completed');
             }, 1000);
         }
     }
     
-    // Запускаем анимацию при загрузке или когда блок виден
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting && !hasStarted) {
                 hasStarted = true;
-                // Небольшая задержка перед началом анимации
                 setTimeout(typeChar, 500);
                 observer.unobserve(entry.target);
             }
@@ -169,11 +148,9 @@ function animateSignature() {
     observer.observe(signatureElement.parentElement);
 }
 
-// Параллакс эффект при скролле (только для первого блока)
 function initParallax() {
     const heroSection = document.querySelector('.hero-section');
     if (!heroSection) {
-        console.error('Hero section not found!');
         return;
     }
     
@@ -185,10 +162,7 @@ function initParallax() {
     function updateParallax() {
         const scrolled = window.pageYOffset;
         
-        // Простая и надежная формула параллакса
-        // Фон двигается медленнее, чем скролл (создает эффект глубины)
         if (isMobile) {
-            // Для мобильных - более заметный эффект
             const parallaxY = scrolled * 0.6;
             heroSection.style.backgroundPosition = `center ${50 - parallaxY * 0.15}%`;
             
@@ -197,7 +171,6 @@ function initParallax() {
                 heroContent.style.transform = `translateY(${contentOffset}px)`;
             }
         } else {
-            // Для десктопа
             const parallaxY = scrolled * 0.5;
             heroSection.style.backgroundPosition = `center ${50 - parallaxY * 0.12}%`;
             
@@ -210,7 +183,6 @@ function initParallax() {
         ticking = false;
     }
     
-    // Обработчик скролла
     window.addEventListener('scroll', () => {
         if (!ticking) {
             window.requestAnimationFrame(updateParallax);
@@ -218,28 +190,22 @@ function initParallax() {
         }
     }, { passive: true });
     
-    // Вызываем сразу для начальной позиции
     updateParallax();
     
-    // Обновляем при изменении размера окна
     window.addEventListener('resize', () => {
         updateParallax();
     }, { passive: true });
-    
-    console.log('Parallax initialized for hero section');
 }
 
-// Анимация появления элементов второго блока
 function initFadeInItems() {
     const items = document.querySelectorAll('.fade-in-item');
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                // Добавляем задержку для каждого элемента
                 setTimeout(() => {
                     entry.target.classList.add('visible');
-                }, index * 400); // 400ms задержка между элементами (было 200ms)
+                }, index * 400);
                 observer.unobserve(entry.target);
             }
         });
@@ -253,7 +219,6 @@ function initFadeInItems() {
     });
 }
 
-// Инициализация
 document.addEventListener('DOMContentLoaded', () => {
     animateSignature();
     initParallax();

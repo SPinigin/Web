@@ -15,7 +15,6 @@ body {
     color: #fff;
 }
 
-/* Параллакс эффект (только для первого блока) */
 .parallax {
     position: relative;
     background-repeat: no-repeat;
@@ -23,7 +22,6 @@ body {
     overflow: hidden;
 }
 
-/* Блок 1: Главный блок */
 .hero-section {
     min-height: 100vh;
     display: flex;
@@ -169,7 +167,6 @@ body {
     transform: translateY(-1px);
 }
 
-/* Блок 2: Дата, время и место */
 .info-section {
     display: flex;
     align-items: center;
@@ -232,7 +229,6 @@ body {
     margin: 3px 0;
 }
 
-/* Анимация появления элементов */
 .fade-in-item {
     opacity: 0;
     transform: translateY(30px);
@@ -244,7 +240,6 @@ body {
     transform: translateY(0);
 }
 
-/* Блок 3: Фото и подпись */
 .signature-section {
     min-height: 100vh;
     display: flex;
@@ -345,7 +340,6 @@ body {
     display: none;
 }
 
-/* Анимации */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -366,11 +360,10 @@ body {
     }
 }
 
-/* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
     .hero-section {
         background-attachment: scroll;
-        background-size: 120% auto; /* Увеличиваем размер для лучшего параллакса */
+        background-size: 120% auto;
     }
     
     .countdown-container {
