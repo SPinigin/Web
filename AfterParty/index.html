@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding AfterParty - Приглашение</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;600&family=Caveat:wght@400;600&family=Satisfy&family=Comfortaa:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Блок 1: Главный блок -->
+    <section class="hero-section parallax">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="invitation-title">Wedding AfterParty</h1>
+                <div class="countdown-label-top">осталось</div>
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">00</span>
+                        <span class="countdown-label">дней</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">00</span>
+                        <span class="countdown-label">часов</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">00</span>
+                        <span class="countdown-label">минут</span>
+                    </div>
+                </div>
+                <button class="calendar-btn" id="addToCalendar">Добавить в календарь</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок 2: Дата, время и место -->
+    <section class="info-section parallax">
+        <div class="info-content">
+            <div class="location">
+                <div class="location-title fade-in-item">Место встречи</div>
+                <p class="fade-in-item">Бар «Инкогнито»</p>
+                <p class="fade-in-item">Орджоникидзе, 63а</p>
+            </div>
+            <div class="date-time">
+                <div class="date fade-in-item">15/02/2026</div>
+                <div class="time fade-in-item">15:00</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок 3: Фото и подпись -->
+    <section class="signature-section parallax">
+        <div class="signature-background">
+            <img src="img/Group.png" alt="Background" class="signature-image">
+        </div>
+        <div class="signature-text-container">
+            <p class="signature-text" id="signatureText">С любовью, семья Сатаевых</p>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
